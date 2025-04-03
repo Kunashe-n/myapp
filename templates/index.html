@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Website</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .description {
+            display: none; /* Hide the full description by default */
+        }
+        .read-more {
+            color: blue;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+    </style>
+    <style>
+        body {
+            margin-bottom: 100px; /* Adds space at the bottom of the page */
+            background-color: #001f3d;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+        }
+        section a {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            text-decoration: none;
+            color: #ffffff;
+            font-size: 18px;
+        }
+        section a i {
+            margin-right: 10px;
+            font-size: 20px;
+        }
+        section {
+            margin: 20px;
+        }
+    </style>
+</head>
+<body style="background-color: #001f3d;">
+    <header>
+        <h1>Welcome to Willard Magiga Exhibit</h1>
+        <nav>
+            <a href="{{ url_for('index') }}">Home</a>
+            <a href="{{ url_for('upload_image') }}">Shop</a>
+            <a href="{{ url_for('about') }}">About</a>
+            <a href="{{ url_for('contact') }}">Contact</a>
+        </nav>
+    </header>
+    
+    <section>
+        <!-- Add the main images one on the left and the other on the right -->
+        <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+            <!-- First Image and Text -->
+            <div style="text-align: center; width: 48%;">
+                <h3>{{'Title:'}}</h3>
+            <h5>{{'Braids Across Boarders'}}</h5>
+            <img src="{{ url_for('static', filename='uploads/images/IMG-20250223-WA0019.jpg') }}" alt="Main Image" style="width: 90%;">
+            <button onclick="toggleDropdown(this)" style="background-color: #001f3d; color: white; border: none; cursor: pointer; text-decoration: underline;">Details</button>
+            <div class="dropdown-content" style="display: none; margin-top: 10px;">
+                <p style="margin: 0;">Medium: Mixed Art Media (Oils, Braids and bond paper) on canvas</p>
+                <p style="margin: 5px;">Year: 2025</p>
+                <p>Artist: Willard Magiga</p>
+                <p>Size: 50x35cm</p>
+                <p>Price: USD$200</p>
+                <p>Status: Available for purchase</p>
+            </div>
+            </div>
+            <!-- Second Image and Text -->
+            <div style="text-align: center; width: 48%;">
+                <h3>{{'Title:'}}</h3>
+            <h3>{{'The Himba Spirit'}}</h3>
+            <img src="{{ url_for('static', filename='uploads/images/IMG-20250329-WA0021.jpg') }}" alt="Main Image" style="width: 115%;">
+            <button onclick="toggleDropdown(this)" style="background-color: #001f3d; color: white; border: none; cursor: pointer; text-decoration: underline;">Details</button>
+            <div class="dropdown-content" style="display: none; margin-top: 10px;">
+                <p style="margin: 0;">Medium: Mixed Art Media (Oils, Acrylics and artificial hair) on canvas</p>
+                <p style="margin: 5px;">Year: 2024</p>
+                <p>Artist: Willard Magiga</p>
+                <p>Size: 34.5x25cm</p>
+                <p>Price: USD$50</p>
+                <p>Status: Available for purchase</p>
+            </div>
+            </div>
+        </div>
+        <script>
+            function toggleDropdown(button) {
+            const dropdown = button.nextElementSibling;
+            if (dropdown.style.display === "none" || dropdown.style.display === "") {
+                dropdown.style.display = "block";
+            } else {
+                dropdown.style.display = "none";
+            }
+            }
+        </script>
+        <h3 style="text-align: center;">{{'Title: Stripes of Joy'}}</h3>
+        <div class="additional-image" style="display: flex: 1; align-items: center;">
+            <div style="display: flex; justify-content: center; align-items: center;">
+               
+                <img src="{{ url_for('static', filename='uploads/images/IMG-20250223-WA0018(1).jpg') }}" alt="Additional Image" style="width:300px;">
+             </div>
+             <div style="margin-left: 3px; text-align: left; margin-top: 10px;">
+                <p style="margin: 0;">Mixed Art Media(Oils and Weave)</p>
+                <p style="margin: 5px;">Year : 2025</p>
+                <p>Artist: Willard Magiga</p> 
+                <p>Size: 80x70cm</p>
+                <p>Price: USD$500</p>
+                <p>Status: Available for purchase</p>
+                <p>'Stripes of Joy' captures the essence of unbridled happiness, as a lovely lady poses serenely amidst a trio of majestic zebras. The black and white stripes of these gentle creatures serve as a poignant reminder of life's beautiful dichotomies - a delicate balance of contrasts that, when embraced, give rise to profound joy. As the lady's smile echoes across the plains, it whispers secrets of contentment, encouraging us to seek harmony within ourselves and with the world around us. In this fleeting moment, time stands still, and the beauty of existence is laid bare, inviting us to bask in the warmth of life's simple pleasures.</p>
+            </div>
+    
+        {% for post in posts %}
+            <div class="post" style="display: flex; flex-direction: column; align-items: center; margin-bottom: 20px; text-align: center;">
+            
+            {% if post.image_file %}
+                <div style="width: 300px;">
+                <h3>{{ 'Title: Kunyeyana' }}</h3>
+                <img src="{{ url_for('static', filename='uploads/images/IMG-20250223-WA0021.jpg') }}" alt="Image" style="width:100%; margin-bottom: 10px;">
+                <div style="margin-left: 3px; text-align: left; margin-top: 10px;">
+                <p>Medium: Mixed Art Media(Oils and Braids)</p>
+                <p>Year: 2025</p>
+                <p>Artist: Willard Magiga</p>
+                <p>Size: 84cm x 60cm</p> 
+                <p>Price: USD$500</p>
+                <p>Status: Available for purchase</p>
+                <p>
+                    <span class="short-description">
+                                "Kunyeyana," a captivating visual narrative, invites viewers to immerse themselves in the intricate dynamics of human interaction. At its core, "Kunyeyana" is an astute observation of the ways in which individuals engage with one another, often veiling their true intentions behind a mask of camaraderie. The artwork presents a tableau of figures, their facial expressions and body language conveying a sense of intrigue, curiosity, and subtle malice. Through the artist's deliberate choice of colors, textures, and composition, the viewer is drawn into a world of whispered secrets, furtive glances, and surreptitious smiles.
+                            </span>
+                            <span class="description">
+                                The dominant hues of blues and greens evoke a sense of melancholy and unease, underscoring the notion that gossiping can be a corrosive and damaging force in our relationships. The figures in the artwork appear to be suspended in a state of animated conversation, their gestures and postures implying a sense of urgency and excitement. Yet, upon closer inspection, the viewer begins to discern the subtle tensions and power dynamics at play. Some figures appear more dominant, their voices and opinions carrying greater weight, while others seem more subdued, their faces tilted in a mixture of curiosity and apprehension. The title "Kunyeyana" itself is a clever play on words, referencing the Setswana phrase for "gossiping" or "talking about others." This choice of title serves as a clever commentary on the universal nature of gossiping, highlighting its ubiquity across cultures and languages. Ultimately, "Kunyeyana" presents a nuanced and thought-provoking exploration of human nature, encouraging the viewer to reflect on their own relationships and interactions with others. By capturing the complexities and subtleties of gossiping, the artist invites us to consider the ways in which our words and actions can impact those around us, and to strive for greater empathy, understanding, and kindness in our daily lives
+                            </span>
+                            <span class="read-more" onclick="toggleDescription(this)">Read More</span>
+                        </p>
+                    </div>
+                   </div> 
+                     <!-- Add the main images one on the left and the other on the right -->
+        <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+            <!-- First Image and Text -->
+            <div style="text-align: center; width: 52%;">
+            <h3>{{'Title: Baba nemwana'}}</h3>
+            <img src="/static/uploads/images/IMG-20250401-WA0007.jpg" alt="Main Image" style="width: 90%;">
+            <button onclick="toggleDropdown(this)" style="background-color: #001f3d; color: white; border: none; cursor: pointer; text-decoration: underline;">Details</button>
+            <div class="dropdown-content" style="display: none; margin-top: 10px;">
+                <p style="margin: 0;">Medium: Oils on canvas</p>
+                <p style="margin: 5px;">Year: 2025</p>
+                <p>Artist: Willard Magiga</p>
+                <p>Size: 34.5x25cm</p>
+                <p>Price: USD$40</p>
+                <p>Status: Available for purchase</p>
+            </div>
+            </div>
+            <!-- Second Image and Text -->
+            <div style="text-align: center; width: 48%;">
+            <h3>{{'Title: Tired Trader'}}</h3>
+            <img src="/static/uploads/images/IMG-20250401-WA0009.jpg" alt="Main Image" style="width: 115%;">
+            <button onclick="toggleDropdown(this)" style="background-color: #001f3d; color: white; border: none; cursor: pointer; text-decoration: underline;">Details</button>
+            <div class="dropdown-content" style="display: none; margin-top: 10px;">
+                <p style="margin: 0;">Medium: Oils on canvas</p>
+                <p style="margin: 5px;">Year: 2025</p>
+                <p>Artist: Willard Magiga</p>
+                <p>Size: 42x29.4cm</p>
+                <p>Price: USD$50</p>
+                <p>Status: Available for purchase</p>
+            </div>
+            </div>
+        </div>
+                {% elif post.video_file %}
+                 <div class="post" style="display: flex; align-items: center; flex-start; margin-bottom: 20px;">
+
+                    <div>
+                        <h3>Potraits on Display</h3>
+                        <video width="300" controls>
+                            <source src="{{ url_for('static', filename='uploads/videos/VID-20250223-WA0022.mp4') }}" type="video/mp4">
+                        </video>
+                    </div>
+                {% endif %}
+            </div>
+        {% endfor %}
+        </section>
+         <!-- Floating WhatsApp Icon -->
+    <a href="https://wa.me/qr/4GMFLUPJK43FG1" style="position: fixed; bottom: 20px; right: 20px; display: flex; align-items: center; text-decoration: none; color: #ffffff; background-color: #25D366; padding: 10px; border-radius: 50px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+        <i class="fab fa-whatsapp" style="font-size: 24px; margin-right: 10px;"></i>
+        <span style="font-size: 18px;">Chat</span>
+    </a>
+    
+    </body>
+    </html>
+    <style>
+    body {
+        margin-bottom: 50px; /* Adds space at the bottom of the page */
+        position: relative; /* Ensures the footer text is positioned correctly */
+    
+
+    footer {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        text-align: center;
+        color: white;
+        padding: 10px 0;
+        font-size: 16px;
+    }
+}
+    </style>
+   
+        <h3 style="text-align: center;">{{'GET IN TOUCH'}}</h3>
+        <header>
+            <p>LIKE, FOLLOW, SUPPORT</p>
+            <p><a href="https://wa.me/qr/4GMFLUPJK43FG1" style="text-decoration: none; color: #ffffff; background-color: #25D366; padding: 10px; border-radius: 5px;">WhatsApp</a></p>
+       </header>
+       <header>
+       <p><a href="https://www.facebook.com/willard.magiga.3" style="text-decoration: none; color: #ffffff; background-color: #4267B2; padding: 10px; border-radius: 5px;">Facebook</a></p>
+       </header>
+       <header>
+       <p><a href="https://www.instagram.com/willard_magiga/" style="text-decoration: none; color: #ffffff; background-color: #C13584; padding: 10px; border-radius: 5px;">Instagram</a></p>
+    </header>
+        <header>
+       <p> <a href="mailto:trinkoharts@gmail.com" style="text-decoration: none; color: #ffffff; background-color: #FF0000; padding: 10px; border-radius: 5px;">
+            <i class="fas fa-envelope"></i> Email
+        </a></p>
+    </header>
+    <p style="text-decoration: underline;">ABOUT</p>
+    <p>Willard Magiga is a visual artist.</p>
+    <p style="text-decoration: underline; margin-bottom: 10px;">MENU</p>
+    <nav style="display: flex; flex-direction: column; align-items: flex-start; margin-top: 0; gap: 10px;"></nav>
+        <p style="display: flex; align-items: center; margin: 0; gap: 5px;"></p>
+            <i class="fas fa-home" style="margin-right: 10px;"></i>
+            <a href="{{ url_for('index') }}" style="text-decoration: none; color: #ffffff;">Home</a>
+        </p>
+        <p style="display: flex; align-items: center; margin: 0; gap: 5px;"></p>
+            <i class="fas fa-shopping-cart" style="margin-right: 10px;"></i>
+            <a href="{{ url_for('upload_image') }}" style="text-decoration: none; color: #ffffff;">Shop</a>
+        </p>
+        <p style="display: flex; align-items: center; margin: 0;"></p>
+            <i class="fas fa-info-circle" style="margin-right: 10px;"></i>
+            <a href="{{ url_for('about') }}" style="text-decoration: none; color: #ffffff;">About</a>
+        </p>
+        <p style="display: flex; align-items: center; margin: 0;"></p>
+            <i class="fas fa-envelope" style="margin-right: 10px;"></i>
+            <a href="{{ url_for('contact') }}" style="text-decoration: none; color: #ffffff;">Contact</a>
+        </p>
+    </nav>
+    <script>
+        function toggleDescription(element) {
+            const description = element.previousElementSibling;
+            const shortDescription = description.previousElementSibling;
+
+            if (description.style.display === "none") {
+                description.style.display = "inline";
+                shortDescription.style.display = "none";
+                element.textContent = "Read Less";
+            } else {
+                description.style.display = "none";
+                shortDescription.style.display = "inline";
+                element.textContent = "Read More";
+            }
+        }
+    </script>
+     <footer style="margin-top: 100px;"></footer>
+        <p>&copy; 2025 | Web design by Kunashe Ndokanga. All rights reserved.</p>
+        <p><a href="mailto:kunashendokanga04@gmail.com" style="text-decoration: none; color: #ffffff; background-color: #FF0000; padding: 10px; border-radius: 5px;">Contact Designer</a></p>
+    </footer>

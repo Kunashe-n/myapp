@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body style="background-color: #001f3d;">
+    <header>
+        <h1>About</h1>
+    </header>
+    <section>
+        <p>Willard Magiga is a visual artist born in Chivi rural District , Masvingo in 2002.
+            He discovered his talent at the young age of nine.During high school, he discovered his passion for custom potraits.Taking commissions and selling his artwork allowed him to earn extra money for school expenses. This experience taught him value of turning his passion into a meaningful pursuit. He became a full time artist soon after finishing his Ordinary Level in 2021. His work is insipired by the African culture and wildlife. Willard Magiga believes in giving back to the community.</p> 
+    </section>
+    <div class="main-image">
+        <h3>{{'Willard Magiga'}}</h3>
+        <img src="{{ url_for('static', filename='uploads/images/IMG-20250225-WA0100(2).jpg') }}" alt="Main Image" style="width:100%;">
+    </div>
+     <!-- Floating WhatsApp Icon -->
+     <a href="https://wa.me/qr/4GMFLUPJK43FG1" style="position: fixed; bottom: 20px; right: 20px; display: flex; align-items: center; text-decoration: none; color: #ffffff; background-color: #25D366; padding: 10px; border-radius: 50px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+        <i class="fab fa-whatsapp" style="font-size: 24px; margin-right: 10px;"></i>
+        <span style="font-size: 18px;">Chat</span>
+        </a>
+</body>
+</html>
+    
+    <style>
+        body {
+            margin-bottom: 50px; /* Adds space at the bottom of the page */
+        }
+    </style>
+    <footer style="margin-top: 100px;"></footer>
+        <p>&copy; 2025 | Web design by Kunashe Ndokanga. All rights reserved.</p>
+        <p><a href="mailto:kunashendokanga04@gmail.com" style="text-decoration: none; color: #ffffff; background-color: #FF0000; padding: 10px; border-radius: 5px;">Contact Designer</a></p>
+    </footer>

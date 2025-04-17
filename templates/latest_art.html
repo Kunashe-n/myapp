@@ -25,6 +25,13 @@
                 <p>In 'A Mother's Prayer', a loving mother pours her soul into creating a stunning wedding gown for her daughter, driven by a heartfelt wish to see her married before she lives this world behind. This exquisite painting on canvas honors the unbreakable bond between a mother and daughter, the vibrant heritage of African tradition, and the universal human desire to cherish every fleeting moment.</p>
             </div>  
         </div>
+        <!-- Add to Cart Icon -->
+        <a href="javascript:void(0);" 
+           onclick="addToCart('A Mother\'s Prayer', 'USD$800', 'Willard Magiga')" 
+           style="text-decoration: none; color: #ffffff; background-color: #25D366; padding: 10px; border-radius: 50%; margin-top: 10px; display: flex; align-items: center; justify-content: center; width: 40px; height: 40px;" 
+           title="Add to Cart">
+            <i class="fas fa-cart-plus" style="font-size: 18px;"></i>
+        </a>
     </div>
     <script>
         function toggleDropdown(button) {
@@ -52,6 +59,13 @@
              </div>  
          </div>
      </div>
+     <!-- Add to Cart Icon -->
+     <a href="javascript:void(0);" 
+     onclick="addToCart('Mhuri yaVaShokoni', 'USD$200', 'Willard Magiga')" 
+     style="text-decoration: none; color: #ffffff; background-color: #25D366; padding: 10px; border-radius: 50%; margin-top: 10px; display: flex; align-items: center; justify-content: center; width: 40px; height: 40px;" 
+     title="Add to Cart">
+      <i class="fas fa-cart-plus" style="font-size: 18px;"></i>
+  </a>
      <script>
          function toggleDropdown(button) {
              const dropdownContent = button.nextElementSibling;
@@ -84,13 +98,39 @@
     <h3 style="text-align: center;">{{'SEE ANYTHING THAT INTERESTS YOU?'}}</h3>
     <header>
         <p>Click on any link below and tell us how you want us to work together.</p>
-        <p><a href="https://wa.me/qr/4GMFLUPJK43FG1" style="text-decoration: none; color: #ffffff; background-color: #25D366; padding: 10px; border-radius: 5px;">WhatsApp</a></p>
+        <p><a href="https://wa.me/message/BJHVRLRXZ6XPO1" style="text-decoration: none; color: #ffffff; background-color: #25D366; padding: 10px; border-radius: 5px;">WhatsApp</a></p>
    </header>
    <header>
    <p> <a href="mailto:trinkoharts@gmail.com" style="text-decoration: none; color: #ffffff; background-color: #0072C6; padding: 10px; border-radius: 5px;">
         <i class="fas fa-envelope"></i> Email
     </a></p>
 </header>
+<section style="margin: 20px; text-align: center;">
+    <h2>REQUESTS</h2>
+    <p>Feel free to reach out to us if you want to purchase an artwork.</p>
+    <p>Simply write the name of the artwork you would like to purchase along with indicated details and click SUBMIT REQUEST.</p>
+    <p>Email: <a href="mailto:trinkoharts@gmail.com" style="color: #ffffff; text-decoration: underline;">trinkoharts@gmail.com</a></p>
+    <p>Phone: <a href="tel:+263 773 149 576" style="color: #ffffff; text-decoration: underline;">+263 773 149 576</a></p>
+    
+    <!-- Form -->
+    <form id="artworkForm" action="https://wa.me/message/BJHVRLRXZ6XPO1" method="get" style="margin-top: 20px; text-align: left; max-width: 400px; margin: 0 auto;">
+        <div id="cartContainer"></div> <!-- Container for dynamically added cart items -->
+
+        <label for="name" style="display: block; margin-bottom: 5px;">Name:</label>
+        <input type="text" id="name" name="name" placeholder="Your Name" required style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 5px; border: 1px solid #ccc;">
+        
+        <label for="subject" style="display: block; margin-bottom: 5px;">Subject:</label>
+        <input type="text" id="subject" name="subject" placeholder="Subject" required style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 5px; border: 1px solid #ccc;">
+        
+        <label for="email" style="display: block; margin-bottom: 5px;">E-mail Address:</label>
+        <input type="email" id="email" name="email" placeholder="Your Email" required style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 5px; border: 1px solid #ccc;">
+        
+        <label for="message" style="display: block; margin-bottom: 5px;">Message:</label>
+        <textarea id="message" name="message" placeholder="Your Message" required style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 5px; border: 1px solid #ccc; height: 100px;"></textarea>
+        
+        <button type="button" onclick="submitCart()" style="background-color: #25D366; color: #ffffff; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; font-size: 16px;">SUBMIT REQUEST</button>
+    </form>
+</section>
 <p style="text-decoration: underline; margin-bottom: 10px;">MENU</p>
 <nav style="display: flex; flex-direction: column; align-items: flex-start; margin-top: 0; gap: 10px;"></nav>
     <p style="display: flex; align-items: center; margin: 0; gap: 5px;"></p>
@@ -111,3 +151,58 @@
     </p>
 </nav>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<script>
+    function addToCartAndSubmit(artworkName, artworkPrice, artistName) {
+        // Populate hidden fields
+        document.getElementById('artworkName').value = artworkName;
+        document.getElementById('artworkPrice').value = artworkPrice;
+        document.getElementById('artistName').value = artistName;
+
+        // Submit the form
+        document.getElementById('artworkForm').submit();
+    }
+</script>
+<script>
+    // Array to store selected items
+    const cart = [];
+
+    function addToCart(artworkName, artworkPrice, artistName) {
+        // Add the selected item to the cart
+        cart.push({ artworkName, artworkPrice, artistName });
+        alert(`${artworkName} has been added to your cart.`);
+    }
+
+    function submitCart() {
+        // Get the form element
+        const form = document.getElementById('artworkForm');
+
+        // Clear any existing input fields for cart items
+        const cartContainer = document.getElementById('cartContainer');
+        cartContainer.innerHTML = '';
+
+        // Add each cart item as hidden input fields
+        cart.forEach((item, index) => {
+            const nameInput = document.createElement('input');
+            nameInput.type = 'hidden';
+            nameInput.name = `cart[${index}][artworkName]`;
+            nameInput.value = item.artworkName;
+
+            const priceInput = document.createElement('input');
+            priceInput.type = 'hidden';
+            priceInput.name = `cart[${index}][artworkPrice]`;
+            priceInput.value = item.artworkPrice;
+
+            const artistInput = document.createElement('input');
+            artistInput.type = 'hidden';
+            artistInput.name = `cart[${index}][artistName]`;
+            artistInput.value = item.artistName;
+
+            cartContainer.appendChild(nameInput);
+            cartContainer.appendChild(priceInput);
+            cartContainer.appendChild(artistInput);
+        });
+
+        // Submit the form
+        form.submit();
+    }
+</script>

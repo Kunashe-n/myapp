@@ -5,61 +5,79 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sold Artworks</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        body {
+            background-color: #001f3d;
+            margin-bottom: 50px; /* Adds space at the bottom of the page */
+            position: relative; /* Ensures the footer text is positioned correctly */
+        }
+
+        .main-image, .additional-image, .post {
+            text-align: center; /* Centers the content inside these divs */
+        }
+
+        img {
+            display: block;
+            margin: 0 auto; /* Centers the images horizontally */
+        }
+
+        h3 {
+            text-align: center; /* Centers the titles */
+        }
+        
+        footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            color: white;
+            padding: 10px 0;
+            font-size: 16px;
+        }
+    </style>
 </head>
-<body style="background-color: #001f3d;">
+<body>
     <header>
         <h1>Sold Artworks</h1>
     </header>
     <section>
-        <div class="main-image">
+        <div class="main-image"></div>
+        <div style="text-align: center; ">
             <h3>{{'Mothers need support'}} </h3>
             <img src="{{ url_for('static', filename='uploads/images/IMG-20250227-WA0011(1).jpg') }}" alt="Additional Image" style="width:300px;">
             <p>Soft pastels on Senacote paper</p>
             <p>Year: 2024</p>
             <p>Status: Sold</p>
         </div>
-        <div class="additional-image">
+    </div>
+        <div class="additional-image"></div>
+        <div style="text-align: center; ">
             <h3>{{'Heritage in Blue'}} </h3>
             <img src="{{ url_for('static', filename='uploads/images/IMG-20250227-WA0009(1).jpg') }}" alt="Additional Image" style="width:300px;">
             <p>Mixed Art Media(Oils and Weave) on canvas</p>
             <p>Year : 2024</p>
             <p>Status: Sold</p>
         </div>
-
-        <div class="post">
+    </div>
+        <div class="post"></div>
+        <div style="text-align: center; ">
             <h3>{{'Braided Beauty'}}</h3>
             <img src="{{ url_for('static', filename='uploads/images/IMG-20250227-WA0010(1).jpg') }}" alt="Image" style="width:300px;">
             <p>Medium: Mixed Art Media(Oils and Braids) on canvas</p>
             <p>Year: 2024</p>
             <p>Status: Sold</p>
+        </div>
+    </div>
     </section>
 
-</body>
-</html>
-<style>
-    body {
-        margin-bottom: 50px; /* Adds space at the bottom of the page */
-        position: relative; /* Ensures the footer text is positioned correctly */
-    
-
-    footer {
-        position: fixed;
-        bottom: 0;
-        width: 100%;
-        text-align: center;
-        color: white;
-        padding: 10px 0;
-        font-size: 16px;
-    }
-}
-    </style>
     <h3 style="text-align: center;">{{'NEED TO PURCHASE AN ARTWORK, GET IN TOUCH'}}</h3>
-   <header> <h5>Click any link below to purchase a painting</h5>
-        <a href="https://wa.me/qr/4GMFLUPJK43FG1" style="text-decoration: none; color: #ffffff; background-color: #25D366; padding: 10px; border-radius: 5px;">WhatsApp</a>
+    <header>
+        <h5>Click any link below to purchase a painting</h5>
+        <a href="https://wa.me/message/BJHVRLRXZ6XPO1" style="text-decoration: none; color: #ffffff; background-color: #25D366; padding: 10px; border-radius: 5px;">WhatsApp</a>
         <a href="https://facebook.com/@willardmagiga" style="text-decoration: none; color: #ffffff; background-color: #1877F2; padding: 10px; border-radius: 5px;">Facebook</a>
         <a href="https://www.instagram.com/trinkoh_arts?igsh=NTc4MTIwNjQ2YQ==" style="text-decoration: none; color: #ffffff; background-color: #833AB4; padding: 10px; border-radius: 5px;">Instagram</a>
-   </header>
-   <p style="text-decoration: underline; margin-bottom: 10px;">MENU</p>
+    </header>
+    <p style="text-decoration: underline; margin-bottom: 10px;">MENU</p>
     <nav style="display: flex; flex-direction: column; align-items: flex-start; margin-top: 0; gap: 10px;"></nav>
         <p style="display: flex; align-items: center; margin: 0; gap: 5px;"></p>
             <i class="fas fa-home" style="margin-right: 10px;"></i>
@@ -69,7 +87,7 @@
             <i class="fas fa-shopping-cart" style="margin-right: 10px;"></i>
             <a href="{{ url_for('upload_image') }}" style="text-decoration: none; color: #ffffff;">Shop</a>
         </p>
-        <p style="display: flex; align-items: center; margin: 0;"></p>
+        <p style="display: flex; align-items: center; margin: 0;">
             <i class="fas fa-info-circle" style="margin-right: 10px;"></i>
             <a href="{{ url_for('about') }}" style="text-decoration: none; color: #ffffff;">About</a>
         </p>
@@ -79,3 +97,5 @@
         </p>
     </nav>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</body>
+</html>

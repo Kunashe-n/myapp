@@ -8,7 +8,7 @@ import os
 import re
 
 # Create the Flask app instance
-app = Flask(__name__, static_url_path='/static')
+app = Flask(__name__, static_folder='static')
 app.secret_key = 'your_secret_key'
 
 # Define the upload sets
@@ -91,6 +91,11 @@ def sold():
 @app.route('/commissions')
 def commissions():
     return render_template('commissions.html')
+
+# Ensure static files are served correctly
+@app.route('/static/<path:filename>')
+def static_files(filename):
+    return app.send_static_file(filename)
 
 if __name__ == "__main__":
     # Use 0.0.0.0 to make the server accessible externally

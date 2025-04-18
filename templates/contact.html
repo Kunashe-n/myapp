@@ -54,28 +54,52 @@
             <i class="fas fa-envelope"></i> Email
         </a>
     </section>
+    <hr style="margin: 0; border: 1px solid #ccc;"> <!-- Removed extra margin from the white line -->
+<div style="height: 100px;"></div> <!-- Reduced blank space between the image and the footer -->
     <section style="margin: 20px; text-align: center;">
         <h2>INQUIRIES</h2>
         <p>Feel free to reach out to us for any questions or inquiries.</p>
         <p>Email: <span style="color: #ffffff; text-decoration: underline;">trinkoharts@gmail.com</span></p>
         <p>Phone: <span style="color: #ffffff; text-decoration: underline;">+263 773 149 576</span></p>
         
-        <form action="https://wa.me/message/BJHVRLRXZ6XPO1" method="get" style="margin-top: 20px; text-align: left; max-width: 400px; margin: 0 auto;">
-            <label for="name" style="display: block; margin-bottom: 5px;">Name:</label>
+        <form onsubmit="submitToWhatsApp(event)" style="margin-top: 10px; text-align: left; max-width: 400px; margin: 0 auto;">
             <input type="text" id="name" name="name" placeholder="Your Name" required style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 5px; border: 1px solid #ccc;">
             
-            <label for="subject" style="display: block; margin-bottom: 5px;">Subject:</label>
             <input type="text" id="subject" name="subject" placeholder="Subject" required style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 5px; border: 1px solid #ccc;">
             
-            <label for="email" style="display: block; margin-bottom: 5px;">E-mail Address:</label>
             <input type="email" id="email" name="email" placeholder="Your Email" required style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 5px; border: 1px solid #ccc;">
             
-            <label for="message" style="display: block; margin-bottom: 5px;">Message:</label>
             <textarea id="message" name="message" placeholder="Your Message" required style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 5px; border: 1px solid #ccc; height: 100px;"></textarea>
             
-            <button type="submit" style="background-color: #25D366; color: #ffffff; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; font-size: 16px;">SUBMIT QUESTION</button>
+            <button type="submit" style="background-color: #25D366; color: #ffffff; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; font-size: 16px;">SUBMIT REQUEST</button>
         </form>
-    </section>
+    
+    <script>
+        function submitToWhatsApp(event) {
+            event.preventDefault(); // Prevent the default form submission behavior
+    
+            // Get form values
+            const name = document.getElementById('name').value.trim();
+            const subject = document.getElementById('subject').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const message = document.getElementById('message').value.trim();
+    
+            // Validate form fields
+            if (!name || !subject || !email || !message) {
+                alert('Please fill out all fields before submitting.');
+                return;
+            }
+    
+            // Construct the WhatsApp message
+            const whatsappMessage = `Hello, my name is ${name}. Subject: ${subject}. Email: ${email}. Message: ${message}`;
+            
+            // Encode the message for the WhatsApp URL
+            const whatsappURL = `https://wa.me/263773149576?text=${encodeURIComponent(whatsappMessage)}`;
+            
+            // Open WhatsApp in a new tab
+            window.open(whatsappURL, '_blank');
+        }
+    </script>
     <!-- Floating WhatsApp Icon -->
     <a href="https://wa.me/message/BJHVRLRXZ6XPO1" style="position: fixed; bottom: 20px; right: 20px; display: flex; align-items: center; text-decoration: none; color: #ffffff; background-color: #25D366; padding: 10px; border-radius: 50px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
         <i class="fab fa-whatsapp" style="font-size: 24px; margin-right: 10px;"></i>

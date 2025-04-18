@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Upload Image</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 </head>
 <body style="background-color: #001f3d;">
     <header>
@@ -25,42 +26,39 @@
         </nav>
     </header>
 
-    <section>
+    <section style="display: flex; flex-direction: column; align-items: center; gap: 20px; text-align: center;">
         <!-- Add the main image here -->
-        <div class="main-image">
+        <div class="main-image" style="width: 80%;">
             <h3>{{'Braids Across Borders'}}</h3>
-            <img src="{{ url_for('static', filename='uploads/images/IMG-20250223-WA0026(1).jpg') }}" alt="Main Image" style="width:100%;">
+            <img src="{{ url_for('static', filename='uploads/images/IMG-20250223-WA0026(1).jpg') }}" alt="Main Image" style="width: 100%; border-radius: 10px;">
         </div>
-        <div class="additional-image">
-            <h3>{{'Kunyeyana'}} </h3>
-            <img src="{{ url_for('static', filename='uploads/images/IMG-20250227-WA0005.jpg') }}" alt="Additional Image" style="width:100%;">
+        <div class="main-image" style="width: 80%;">
+            <h3>{{'Kunyeyana'}}</h3>
+            <img src="{{ url_for('static', filename='uploads/images/IMG-20250227-WA0005.jpg') }}" alt="Additional Image" style="width: 100%; border-radius: 10px;">
         </div>
+    </section>
         {% for post in posts %}
-            <div class="post">
-                
+            <div class="post" style="width: 80%; border: 1px solid #ccc; padding: 10px; border-radius: 10px;">
                 {% if post.image_file %}
-                <h3>{{ post.title }}</h3>
-                <img src="{{ url_for('static', filename=post.image_file) }}" alt="Image" style="width:300px;">
+                    <h3>{{ post.title }}</h3>
+                    <img src="{{ url_for('static', filename=post.image_file) }}" alt="Image" style="width: 100%; border-radius: 10px;">
                     <p>Medium: {{ post.medium }}</p>
                     <p>Year: {{ post.year }}</p>
                 {% else %}
                     <h3>Potraits on Display</h3>
-                    <video width="300" controls>
+                    <video width="100%" controls style="border-radius: 10px;">
                         <source src="{{ url_for('static', filename=post.video_file) }}" type="video/mp4">
                     </video>
                 {% endif %}
-            
-                <!-- Comment Section (can be implemented later) -->
             </div>
         {% endfor %}
     </section>
-   
 </body>
 </html>
 
     <style>
     body {
-        margin-bottom: 2px; /* Adds space at the bottom of the page */
+        margin-bottom: 50px; /* Adds space at the bottom of the page */
         position: relative; /* Ensures the footer text is positioned correctly */
     
 
@@ -75,70 +73,38 @@
     }
 }
     </style>
-   <style>
-    .bottom-section-background {
-        position: relative;
-        padding: 20px;
-        color: white;
-        text-align: center;
-        border-radius: 10px;
-        overflow: hidden; /* Ensures the pseudo-element doesn't overflow */
-        min-height: 100vh; /* Ensures the section covers the full height of the viewport */
-    }
-
-    /* Add the blurred background image using ::before */
-    .bottom-section-background::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-image: url('{{ url_for('static', filename='uploads/images/IMG-20250417-WA0008.jpg') }}');
-        background-size: cover; /* Ensures the image covers the entire section */
-        background-repeat: no-repeat;
-        background-position: center;
-        filter: blur(2px); /* Apply blur effect */
-        z-index: 1; /* Place it behind the content */
-    }
-
-    /* Ensure the content is above the blurred background */
-    .bottom-section-background * {
-        position: relative;
-        z-index: 2;
-    }
-</style>
+<hr style="margin: 50; border: 1px solid #ccc;"> <!-- Removed extra margin from the white line -->
 
 <div class="bottom-section-background">
-        <h3 style="text-align: center;">{{'SEE ANYTHING THAT INTERESTS YOU?'}}</h3>
-        <header style="background-color: transparent; text-align: center; padding: 10px;"></header>
-            <p>Click on any link below and tell us how you want us to work together.</p>
-            <p><a href="https://wa.me/message/BJHVRLRXZ6XPO1" style="text-decoration: none; color: #ffffff; background-color: #25D366; padding: 10px; border-radius: 5px;">WhatsApp</a>
-            </p>
-       <p> <a href="mailto:trinkoharts@gmail.com" style="text-decoration: none; color: #ffffff; background-color: #0072C6; padding: 10px; border-radius: 5px;">
-            <i class="fas fa-envelope"></i> Email
-        </a></p>
-    
-    <p style="text-decoration: underline; margin-bottom: 10px;">MENU</p>
-    <nav style="display: flex; flex-direction: column; align-items: flex-start; margin-top: 0; gap: 10px;"></nav>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-        <p style="display: flex; align-items: center; margin: 0; gap: 5px;"></p>
-            <i class="fas fa-home" style="margin-right: 10px;"></i>
-            <a href="{{ url_for('index') }}" style="text-decoration: none; color: #ffffff;">Home</a>
-        </p>
-        <p style="display: flex; align-items: center; margin: 0; gap: 5px;"></p>
-            <i class="fas fa-shopping-cart" style="margin-right: 10px;"></i>
-            <a href="{{ url_for('upload_image') }}" style="text-decoration: none; color: #ffffff;">Shop</a>
-        </p>
-        <p style="display: flex; align-items: center; margin: 0;"></p>
-            <i class="fas fa-info-circle" style="margin-right: 10px;"></i>
-            <a href="{{ url_for('about') }}" style="text-decoration: none; color: #ffffff;">About</a>
-        </p>
-        <p style="display: flex; align-items: center; margin: 0;"></p>
-            <i class="fas fa-envelope" style="margin-right: 10px;"></i>
-            <a href="{{ url_for('contact') }}" style="text-decoration: none; color: #ffffff;">Contact</a>
-        </p>
-    </nav>
+    <header>
+    <h3 style="text-align: center;">{{'SEE ANYTHING THAT INTERESTS YOU?'}}</h3>
+        <p>CLICK ON ANY LINK BELOW TO ENQUIRE ABOUT THE PROCESS</p>
+        <p><a href="https://wa.me/message/BJHVRLRXZ6XPO1" style="text-decoration: none; color: #ffffff; background-color: #25D366; padding: 10px; border-radius: 5px;">WhatsApp</a></p>
+    </header>
+    <header>
+        <p><a href="mailto:trinkoharts@gmail.com" style="text-decoration: none; color: #ffffff; background-color: #0072C6; padding: 10px; border-radius: 5px;">Email</a></p>
+    </header>
+    <p style="text-decoration: underline; margin-bottom: 10px; text-align: left;">MENU</p>
+<nav style="display: flex; flex-direction: column; align-items: flex-start; margin-top: 0; gap: 10px; text-align: left;"></nav>
+    <p style="display: flex; align-items: center; margin: 0; gap: 5px;">
+        <i class="fas fa-home" style="margin-right: 10px;"></i>
+        <a href="{{ url_for('index') }}" style="text-decoration: none; color: #ffffff;">Home</a>
+    </p>
+    <p style="display: flex; align-items: center; margin: 0; gap: 5px;">
+        <i class="fas fa-shopping-cart" style="margin-right: 10px;"></i>
+        <a href="{{ url_for('upload_image') }}" style="text-decoration: none; color: #ffffff;">Shop</a>
+    </p>
+    <p style="display: flex; align-items: center; margin: 0;">
+        <i class="fas fa-info-circle" style="margin-right: 10px;"></i>
+        <a href="{{ url_for('about') }}" style="text-decoration: none; color: #ffffff;">About</a>
+    </p>
+    <p style="display: flex; align-items: center; margin: 0;">
+        <i class="fas fa-envelope" style="margin-right: 10px;"></i>
+        <a href="{{ url_for('contact') }}" style="text-decoration: none; color: #ffffff;">Contact</a>
+    </p>
+</nav>
+
+
       <!-- Floating WhatsApp Icon -->
  <a href="https://wa.me/message/BJHVRLRXZ6XPO1" style="position: fixed; bottom: 20px; right: 20px; display: flex; align-items: center; text-decoration: none; color: #ffffff; background-color: #25D366; padding: 10px; border-radius: 50px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
     <i class="fab fa-whatsapp" style="font-size: 24px; margin-right: 10px;"></i>

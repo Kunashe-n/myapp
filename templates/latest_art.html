@@ -59,13 +59,15 @@
              </div>  
          </div>
      </div>
-     <!-- Add to Cart Icon -->
-     <a href="javascript:void(0);" 
-     onclick="addToCart('Mhuri yaVaShokoni', 'USD$200', 'Willard Magiga')" 
-     style="text-decoration: none; color: #ffffff; background-color: #25D366; padding: 10px; border-radius: 50%; margin-top: 10px; display: flex; align-items: center; justify-content: center; width: 40px; height: 40px;" 
-     title="Add to Cart">
-      <i class="fas fa-cart-plus" style="font-size: 18px;"></i>
-  </a>
+    <!-- Add to Cart Icon -->
+    <div style="display: flex; justify-content: center; margin-top: 10px;">
+        <a href="javascript:void(0);" 
+           onclick="addToCart('Mhuri yaVaShokoni', 'USD$200', 'Willard Magiga')" 
+           style="text-decoration: none; color: #ffffff; background-color: #25D366; padding: 10px; border-radius: 50%; display: flex; align-items: center; justify-content: center; width: 40px; height: 40px;" 
+           title="Add to Cart">
+            <i class="fas fa-cart-plus" style="font-size: 18px;"></i>
+        </a>
+    </div>
      <script>
          function toggleDropdown(button) {
              const dropdownContent = button.nextElementSibling;
@@ -76,63 +78,152 @@
              }
          }
      </script>
-</body>
-<style>
-    body {
-        margin-bottom: 50px; /* Adds space at the bottom of the page */
-        position: relative; /* Ensures the footer text is positioned correctly */
-    
+    <hr style="margin: 100px 0; border: 1px solid #ccc;"> <!-- Line added between the last image and the content below -->
 
-    footer {
-        position: fixed;
-        bottom: 0;
-        width: 100%;
-        text-align: center;
-        color: white;
-        padding: 10px 0;
-        font-size: 16px;
-    }
-}
+    <script>
+        // Array to store selected items
+        const cart = [];
+
+        function addToCart(artworkName, artworkPrice, artistName) {
+            // Add the selected item to the cart
+            cart.push({ artworkName, artworkPrice, artistName });
+            alert(`${artworkName} has been added to your cart.`);
+
+            // Update the cart preview
+            updateCartPreview();
+        }
+
+        function updateCartPreview() {
+            const cartPreview = document.getElementById('cartPreview');
+            cartPreview.innerHTML = ''; // Clear the existing cart preview
+
+            if (cart.length === 0) {
+                cartPreview.innerHTML = '<p>Your cart is empty.</p>';
+                return;
+            }
+
+            cart.forEach((item, index) => {
+                const cartItem = document.createElement('div');
+                cartItem.style.marginBottom = '10px';
+                cartItem.innerHTML = `
+                    <p><strong>${item.artworkName}</strong></p>
+                    <p>Price: ${item.artworkPrice}</p>
+                    <p>Artist: ${item.artistName}</p>
+                    <button onclick="removeFromCart(${index})" style="background-color: #ff4d4d; color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer;">Remove</button>
+                `;
+                cartPreview.appendChild(cartItem);
+            });
+        }
+
+        function removeFromCart(index) {
+            // Remove the item from the cart
+            cart.splice(index, 1);
+            updateCartPreview();
+        }
+
+        function submitCart() {
+            if (cart.length === 0) {
+                alert('Your cart is empty. Please add items before submitting.');
+                return;
+            }
+
+            // Format the cart data into a WhatsApp message
+            let message = 'Hello, I would like to purchase the following items:\n\n';
+            cart.forEach((item, index) => {
+                message += `${index + 1}. Artwork: ${item.artworkName}\n   Price: ${item.artworkPrice}\n   Artist: ${item.artistName}\n\n`;
+            });
+
+            // Add user details from the form
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const subject = document.getElementById('subject').value;
+            const userMessage = document.getElementById('message').value;
+
+            if (!name || !email || !subject || !userMessage) {
+                alert('Please fill out all the fields before submitting.');
+                return;
+            }
+
+            message += `Name: ${name}\nEmail: ${email}\nSubject: ${subject}\nMessage: ${userMessage}`;
+
+            // Encode the message for the WhatsApp URL
+            const encodedMessage = encodeURIComponent(message);
+
+            // Redirect to the WhatsApp link with the message
+            const whatsappLink = `https://wa.me/263773149576?text=${encodedMessage}`;
+            window.open(whatsappLink, '_blank');
+        }
+
+        function toggleFormDropdown(button) {
+            const formDropdown = button.nextElementSibling;
+            if (formDropdown.style.display === "none" || formDropdown.style.display === "") {
+                formDropdown.style.display = "block";
+            } else {
+                formDropdown.style.display = "none";
+            }
+        }
+    </script>
+
+    <!-- Cart Preview Section -->
+    <section id="cartPreviewSection" style="margin: 20px; text-align: center;">
+        <h2>Your Cart</h2>
+        <div id="cartPreview" style="margin-top: 10px; text-align: left; max-width: 400px; margin: 0 auto; padding: 10px; border: 1px solid #ccc; border-radius: 5px; background-color: #f9f9f9;">
+            <p>Your cart is empty.</p>
+        </div>
+    </section>
+
+    <!-- Form Dropdown -->
+    <div style="text-align: center; margin-top: 20px;">
+        <button onclick="toggleFormDropdown(this)" style="background-color: #001f3d; color: white; border: none; cursor: pointer; text-decoration: underline; padding: 10px 20px; border-radius: 5px;">Submit Request</button>
+        <div style="display: none; margin-top: 10px; text-align: left; max-width: 400px; margin: 0 auto; padding: 10px; border: 1px solid #ccc; border-radius: 5px; background-color: #f9f9f9;">
+            <form id="artworkForm" onsubmit="event.preventDefault(); submitCart();">
+                <label for="name" style="display: block; margin-bottom: 5px;">Name:</label>
+                <input type="text" id="name" name="name" placeholder="Your Name" required style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 5px; border: 1px solid #ccc;">
+                
+                <label for="subject" style="display: block; margin-bottom: 5px;">Subject:</label>
+                <input type="text" id="subject" name="subject" placeholder="Subject" required style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 5px; border: 1px solid #ccc;">
+                
+                <label for="email" style="display: block; margin-bottom: 5px;">E-mail Address:</label>
+                <input type="email" id="email" name="email" placeholder="Your Email" required style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 5px; border: 1px solid #ccc;">
+                
+                <label for="message" style="display: block; margin-bottom: 5px;">Message:</label>
+                <textarea id="message" name="message" placeholder="Your Message" required style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 5px; border: 1px solid #ccc; height: 100px;"></textarea>
+                
+                <button type="submit" style="background-color: #25D366; color: #ffffff; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; font-size: 16px;">SUBMIT REQUEST</button>
+            </form>
+        </div>
+    </div>
+
+    <style>
+        body {
+            margin-bottom: 50px; /* Adds space at the bottom of the page */
+            position: relative; /* Ensures the footer text is positioned correctly */
+        }
+
+        footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            color: white;
+            padding: 10px 0;
+            font-size: 16px;
+        }
     </style>
     <div style="height: 50px;"></div> <!-- Adds blank space between the image and the footer -->
     <h3 style="text-align: center;">{{'SEE ANYTHING THAT INTERESTS YOU?'}}</h3>
     <header>
         <p>Click on any link below and tell us how you want us to work together.</p>
         <p><a href="https://wa.me/message/BJHVRLRXZ6XPO1" style="text-decoration: none; color: #ffffff; background-color: #25D366; padding: 10px; border-radius: 5px;">WhatsApp</a></p>
-   </header>
-   <header>
-   <p> <a href="mailto:trinkoharts@gmail.com" style="text-decoration: none; color: #ffffff; background-color: #0072C6; padding: 10px; border-radius: 5px;">
-        <i class="fas fa-envelope"></i> Email
-    </a></p>
-</header>
-<section style="margin: 20px; text-align: center;">
-    <h2>REQUESTS</h2>
-    <p>Feel free to reach out to us if you want to purchase an artwork.</p>
-    <p>Simply write the name of the artwork you would like to purchase along with indicated details and click SUBMIT REQUEST.</p>
-    <p>Email: <a href="mailto:trinkoharts@gmail.com" style="color: #ffffff; text-decoration: underline;">trinkoharts@gmail.com</a></p>
-    <p>Phone: <a href="tel:+263 773 149 576" style="color: #ffffff; text-decoration: underline;">+263 773 149 576</a></p>
-    
-    <!-- Form -->
-    <form id="artworkForm" action="https://wa.me/message/BJHVRLRXZ6XPO1" method="get" style="margin-top: 20px; text-align: left; max-width: 400px; margin: 0 auto;">
-        <div id="cartContainer"></div> <!-- Container for dynamically added cart items -->
+    </header>
+    <header>
+        <p><a href="mailto:trinkoharts@gmail.com" style="text-decoration: none; color: #ffffff; background-color: #0072C6; padding: 10px; border-radius: 5px;">
+            <i class="fas fa-envelope"></i> Email
+        </a></p>
+    </header>
 
-        <label for="name" style="display: block; margin-bottom: 5px;">Name:</label>
-        <input type="text" id="name" name="name" placeholder="Your Name" required style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 5px; border: 1px solid #ccc;">
-        
-        <label for="subject" style="display: block; margin-bottom: 5px;">Subject:</label>
-        <input type="text" id="subject" name="subject" placeholder="Subject" required style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 5px; border: 1px solid #ccc;">
-        
-        <label for="email" style="display: block; margin-bottom: 5px;">E-mail Address:</label>
-        <input type="email" id="email" name="email" placeholder="Your Email" required style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 5px; border: 1px solid #ccc;">
-        
-        <label for="message" style="display: block; margin-bottom: 5px;">Message:</label>
-        <textarea id="message" name="message" placeholder="Your Message" required style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 5px; border: 1px solid #ccc; height: 100px;"></textarea>
-        
-        <button type="button" onclick="submitCart()" style="background-color: #25D366; color: #ffffff; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; font-size: 16px;">SUBMIT REQUEST</button>
-    </form>
-</section>
-<p style="text-decoration: underline; margin-bottom: 10px;">MENU</p>
-<nav style="display: flex; flex-direction: column; align-items: flex-start; margin-top: 0; gap: 10px;"></nav>
+    <p style="text-decoration: underline; margin-bottom: 10px;">MENU</p>
+    <nav style="display: flex; flex-direction: column; align-items: flex-start; margin-top: 0; gap: 10px;"></nav>
     <p style="display: flex; align-items: center; margin: 0; gap: 5px;"></p>
         <i class="fas fa-home" style="margin-right: 10px;"></i>
         <a href="{{ url_for('index') }}" style="text-decoration: none; color: #ffffff;">Home</a>
@@ -149,60 +240,16 @@
         <i class="fas fa-envelope" style="margin-right: 10px;"></i>
         <a href="{{ url_for('contact') }}" style="text-decoration: none; color: #ffffff;">Contact</a>
     </p>
-</nav>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-<script>
-    function addToCartAndSubmit(artworkName, artworkPrice, artistName) {
-        // Populate hidden fields
-        document.getElementById('artworkName').value = artworkName;
-        document.getElementById('artworkPrice').value = artworkPrice;
-        document.getElementById('artistName').value = artistName;
+    </nav>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script>
+        function addToCartAndSubmit(artworkName, artworkPrice, artistName) {
+            // Populate hidden fields
+            document.getElementById('artworkName').value = artworkName;
+            document.getElementById('artworkPrice').value = artworkPrice;
+            document.getElementById('artistName').value = artistName;
 
-        // Submit the form
-        document.getElementById('artworkForm').submit();
-    }
-</script>
-<script>
-    // Array to store selected items
-    const cart = [];
-
-    function addToCart(artworkName, artworkPrice, artistName) {
-        // Add the selected item to the cart
-        cart.push({ artworkName, artworkPrice, artistName });
-        alert(`${artworkName} has been added to your cart.`);
-    }
-
-    function submitCart() {
-        // Get the form element
-        const form = document.getElementById('artworkForm');
-
-        // Clear any existing input fields for cart items
-        const cartContainer = document.getElementById('cartContainer');
-        cartContainer.innerHTML = '';
-
-        // Add each cart item as hidden input fields
-        cart.forEach((item, index) => {
-            const nameInput = document.createElement('input');
-            nameInput.type = 'hidden';
-            nameInput.name = `cart[${index}][artworkName]`;
-            nameInput.value = item.artworkName;
-
-            const priceInput = document.createElement('input');
-            priceInput.type = 'hidden';
-            priceInput.name = `cart[${index}][artworkPrice]`;
-            priceInput.value = item.artworkPrice;
-
-            const artistInput = document.createElement('input');
-            artistInput.type = 'hidden';
-            artistInput.name = `cart[${index}][artistName]`;
-            artistInput.value = item.artistName;
-
-            cartContainer.appendChild(nameInput);
-            cartContainer.appendChild(priceInput);
-            cartContainer.appendChild(artistInput);
-        });
-
-        // Submit the form
-        form.submit();
-    }
-</script>
+            // Submit the form
+            document.getElementById('artworkForm').submit();
+        }
+    </script>

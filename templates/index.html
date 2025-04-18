@@ -226,7 +226,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('{{ url_for('static', filename='uploads/images/IMG-20250417-WA0008.jpg') }}');
+            background-image: url('{{ url_for('static', filename='uploads/images/IMG-20250417-WA0008.jpg') }}?v=1');
             background-size: cover; /* Ensures the image covers the entire section */
             background-repeat: no-repeat;
             background-position: center;
@@ -281,6 +281,15 @@
             <a href="{{ url_for('contact') }}" style="text-decoration: none; color: #ffffff;">Contact</a>
         </p>
         </nav>
+         <!-- Floating WhatsApp Icon -->
+    <a href="https://wa.me/message/BJHVRLRXZ6XPO1" style="position: fixed; bottom: 20px; right: 20px; display: flex; align-items: center; text-decoration: none; color: #ffffff; background-color: #25D366; padding: 10px; border-radius: 50px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+        <i class="fab fa-whatsapp" style="font-size: 24px; margin-right: 10px;"></i>
+        <span style="font-size: 18px;">Chat</span>
+    </a>
+    <footer style="margin-top: 100px;"></footer>
+    <p>&copy; 2025 | Web design by Kunashe Ndokanga. All rights reserved.</p>
+    <p><a href="mailto:kunashendokanga04@gmail.com" style="text-decoration: none; color: #ffffff; background-color: #FF0000; padding: 10px; border-radius: 5px;">Contact Developer</a></p>
+
         <script>
             function toggleDescription(element) {
                 const description = element.previousElementSibling;
@@ -297,12 +306,6 @@
                 }
             }
         </script>
-          <!-- Floating WhatsApp Icon -->
-    <a href="https://wa.me/message/BJHVRLRXZ6XPO1" style="position: fixed; bottom: 20px; right: 20px; display: flex; align-items: center; text-decoration: none; color: #ffffff; background-color: #25D366; padding: 10px; border-radius: 50px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
-        <i class="fab fa-whatsapp" style="font-size: 24px; margin-right: 10px;"></i>
-        <span style="font-size: 18px;">Chat</span>
-    </a>
-        <footer style="margin-top: 100px;"></footer>
-        <p>&copy; 2025 | Web design by Kunashe Ndokanga. All rights reserved.</p>
-        <p><a href="mailto:kunashendokanga04@gmail.com" style="text-decoration: none; color: #ffffff; background-color: #FF0000; padding: 10px; border-radius: 5px;">Contact Developer</a></p>
-    </div>
+```html
+
+

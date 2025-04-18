@@ -191,97 +191,36 @@
             </div>
             </div>
         </div>
-                {% elif post.video_file %}
-                 <div class="post" style="display: flex; align-items: center; flex-start; margin-bottom: 20px;">
+            {% elif post.video_file %}
+             <div class="post" style="display: flex; align-items: center; flex-start; margin-bottom: 0px; background-color: #001f3d; padding: 0px;"></div>
 
-                    <div>
-                        <h3>Potraits on Display</h3>
-                        <video width="300" controls>
-                            <source src="{{ url_for('static', filename='uploads/videos/VID-20250223-WA0022.mp4') }}" type="video/mp4">
-                        </video>
-                    </div>
-                {% endif %}
+            <div>
+            <h3 style="color: #ffffff; margin-bottom: 5px;">Potraits on Display</h3>
+            <video width="300" controls style="margin-bottom: 0;">
+            <source src="{{ url_for('static', filename='uploads/videos/VID-20250223-WA0022.mp4') }}" type="video/mp4">
+            </video>
+            </div>
+            {% endif %}
             </div>
         {% endfor %}
+        <div style="height: 0px; margin-bottom: 0;"></div>
         </section>
-    
-    </body>
-    </html>
-    <style>
-        .bottom-section-background {
-            position: relative;
-            padding: 20px;
-            color: white;
-            text-align: center;
-            border-radius: 10px;
-            overflow: hidden; /* Ensures the pseudo-element doesn't overflow */
-            min-height: 100vh; /* Ensures the section covers the full height of the viewport */
-        }
-
-        /* Add the blurred background image using ::before */
-        .bottom-section-background::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('{{ url_for('static', filename='uploads/images/IMG-20250417-WA0008.jpg') }}?v=1');
-            background-size: cover; /* Ensures the image covers the entire section */
-            background-repeat: no-repeat;
-            background-position: center;
-            filter: blur(2px); /* Apply blur effect */
-            z-index: 1; /* Place it behind the content */
-        }
-
-        /* Ensure the content is above the blurred background */
-        .bottom-section-background * {
-            position: relative;
-            z-index: 2;
-        }
-    </style>
-
-    <div class="bottom-section-background">
+        
+        </body>
+        </html>
+        <hr style="margin: 0; border: 1px solid #ccc; position: relative; top: 0px;"> <!-- Adjusted position to remove gap -->
+        <div style="height: 50px;"></div> <!-- Reduced blank space between the image and the footer -->
         <h3 style="text-align: center;">{{'GET IN TOUCH'}}</h3>
-
-        <header style="background-color: transparent; text-align: center; padding: 10px;"></header>
-            <p>LIKE, FOLLOW, SUPPORT</p>
-            <p><a href="https://wa.me/message/BJHVRLRXZ6XPO1" style="text-decoration: none; color: #ffffff; background-color: #25D366; padding: 10px; border-radius: 5px;">WhatsApp</a></p>
-        </header>
-        <header style="background-color: transparent; text-align: center; padding: 10px;"></header>
-            <p><a href="https://facebook.com/@willardmagiga" style="text-decoration: none; color: #ffffff; background-color: #1877F2; padding: 10px; border-radius: 5px;">Facebook</a></p>
-        </header>
-        <header style="background-color: transparent; text-align: center; padding: 10px;"></header>
-            <p><a href="https://www.instagram.com/trinkoh_arts?igsh=NTc4MTIwNjQ2YQ==" style="text-decoration: none; color: #ffffff; background-color: #833AB4; padding: 10px; border-radius: 5px;">Instagram</a></p>
-        </header>
-        <header style="background-color: transparent; text-align: center; padding: 10px;"></header>
-            <p><a href="https://youtube.com/@willardmagiga?si=iqZKvunZYQSUUp4Z" style="text-decoration: none; color: #ffffff; background-color: #FD1D1D; padding: 10px; border-radius: 5px;">YouTube</a></p>
-        </header>
-        <header style="background-color: transparent; text-align: center; padding: 10px;"></header>
-            <p><a href="mailto:trinkoharts@gmail.com" style="text-decoration: none; color: #ffffff; background-color: #0072C6; padding: 10px; border-radius: 5px;">Email</a></p>
-        </header>
-        <p style="text-decoration: underline;">ABOUT</p>
-        <p>Willard Magiga is a visual artist.</p>
-        <p style="text-decoration: underline; margin-bottom: 10px;">MENU</p>
-        <nav style="display: flex; flex-direction: column; align-items: center; margin-top: 0; gap: 10px;">
-        <p style="display: flex; align-items: center; margin: 0; gap: 5px;">
-            <i class="fas fa-home" style="margin-right: 10px;"></i>
-            <a href="{{ url_for('index') }}" style="text-decoration: none; color: #ffffff;">Home</a>
-        </p>
-        <p style="display: flex; align-items: center; margin: 0; gap: 5px;">
-            <i class="fas fa-shopping-cart" style="margin-right: 10px;"></i>
-            <a href="{{ url_for('upload_image') }}" style="text-decoration: none; color: #ffffff;">Shop</a>
-        </p>
-        <p style="display: flex; align-items: center; margin: 0;">
-            <i class="fas fa-info-circle" style="margin-right: 10px;"></i>
-            <a href="{{ url_for('about') }}" style="text-decoration: none; color: #ffffff;">About</a>
-        </p>
-        <p style="display: flex; align-items: center; margin: 0;">
-            <i class="fas fa-envelope" style="margin-right: 10px;"></i>
-            <a href="{{ url_for('contact') }}" style="text-decoration: none; color: #ffffff;">Contact</a>
-        </p>
-        </nav>
-         <!-- Floating WhatsApp Icon -->
+        <div style="text-align: center; padding: 10px;">
+            <p style="text-align: center;">LIKE, FOLLOW, SUPPORT</p>
+            <p style="margin-bottom: 30px;"><a href="https://wa.me/message/BJHVRLRXZ6XPO1" style="text-decoration: none; color: #ffffff; background-color: #25D366; padding: 10px; border-radius: 5px;">WhatsApp</a></p>
+            <p style="margin-bottom: 30px;"><a href="https://facebook.com/@willardmagiga" style="text-decoration: none; color: #ffffff; background-color: #1877F2; padding: 10px; border-radius: 5px;">Facebook</a></p>
+            <p style="margin-bottom: 30px;"><a href="https://www.instagram.com/trinkoh_arts?igsh=NTc4MTIwNjQ2YQ==" style="text-decoration: none; color: #ffffff; background-color: #833AB4; padding: 10px; border-radius: 5px;">Instagram</a></p>
+            <p style="margin-bottom: 30px;"><a href="https://youtube.com/@willardmagiga?si=iqZKvunZYQSUUp4Z" style="text-decoration: none; color: #ffffff; background-color: #FD1D1D; padding: 10px; border-radius: 5px;">YouTube</a></p>
+            <p style="margin-bottom: 30px;"><a href="mailto:trinkoharts@gmail.com" style="text-decoration: none; color: #ffffff; background-color: #0072C6; padding: 10px; border-radius: 5px;">Email</a></p>
+            <p style="text-decoration: underline; text-align: center;">ABOUT</p>
+            <p style="text-align: center;">Willard Magiga is a visual artist.</p>
+        </div>
     <a href="https://wa.me/message/BJHVRLRXZ6XPO1" style="position: fixed; bottom: 20px; right: 20px; display: flex; align-items: center; text-decoration: none; color: #ffffff; background-color: #25D366; padding: 10px; border-radius: 50px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
         <i class="fab fa-whatsapp" style="font-size: 24px; margin-right: 10px;"></i>
         <span style="font-size: 18px;">Chat</span>
@@ -306,6 +245,16 @@
                 }
             }
         </script>
-```html
-
+       
+        <script>
+            // Function to toggle light mode styles
+            function toggleLightMode() {
+                const lightModeStyle = document.getElementById('light-mode-style');
+                if (lightModeStyle.disabled) {
+                    lightModeStyle.disabled = false; // Enable light mode styles
+                } else {
+                    lightModeStyle.disabled = true; // Disable light mode styles
+                }
+            }
+        </script>
 

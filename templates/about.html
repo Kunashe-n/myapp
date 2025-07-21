@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            background-color: #e0e0e0; /* Light background for neumorphism */
+            color: #333;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header {
+            background: #001f3d;
+            border-radius: 20px;
+            box-shadow: 8px 8px 15px rgba(184, 184, 184, 0.5), -8px -8px 15px rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            width: 90%;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        h1 {
+            color: #e0e0e0; /* Dark text for header */
+        }
+
+        section {
+            width: 90%;
+            margin: 20px 0;
+            background: #ffffff; /* Light background for section */
+            border-radius: 20px;
+            box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.2), -8px -8px 15px rgba(255, 255, 255, 0.9);
+            padding: 20px;
+        }
+
+        p {
+            line-height: 1.6; /* Improved readability */
+        }
+
+        .main-image {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .main-image img {
+            border-radius: 10px;
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2), -5px -5px 10px rgba(255, 255, 255, 0.9);
+            width: 100%;
+            max-width: 600px; /* Limit max width */
+        }
+
+        /* Floating WhatsApp Icon */
+        .whatsapp-icon {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: #ffffff;
+            background-color: #25D366;
+            padding: 10px;
+            border-radius: 50px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .whatsapp-icon i {
+            font-size: 24px;
+            margin-right: 10px;
+        }
+
+        footer {
+            margin-top: 100px;
+            text-align: center;
+            width: 90%;
+        }
+
+        footer p {
+            margin: 5px 0;
+        }
+
+        .whatsapp-icon.light-mode {
+            background-color: #25D366; /* WhatsApp icon color */
+        }
+    </style>
+</head>
+<body>
+    <header>
+       <h2 style="font-family: 'Montserrat', Arial, sans-serif; font-weight: bold; color: #fff;">About Willard Magiga</h2>
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:700&display=swap" rel="stylesheet">
+    <nav>
+           <a href="{{ url_for('index') }}" title="Home">
+        <i class="fas fa-home"></i>
+    </a>
+     <a href="{{ url_for('upload_image') }}" title="Shop">
+            <i class="fas fa-shopping-cart"></i>
+        </a>
+        <a href="{{ url_for('contact') }}" title="Contact">
+            <i class="fas fa-envelope"></i>
+        </a>
+        </nav>
+    </header>
+    
+    <section>
+        <p>Willard Magiga is a visual artist born in Chivi rural District, Masvingo in 2002. He discovered his talent at the young age of nine. During high school, he discovered his passion for custom portraits. Taking commissions and selling his artwork allowed him to earn extra money for school expenses. This experience taught him the value of turning his passion into a meaningful pursuit. He became a full-time artist soon after finishing his Ordinary Level in 2021. His work is inspired by African culture and wildlife. Willard Magiga believes in giving back to the community.</p> 
+    </section>
+    
+    <div class="main-image">
+        <h3>{{'Willard Magiga'}}</h3>
+        <img src="{{ url_for('static', filename='uploads/images/IMG-20250225-WA0100(2).jpg') }}" alt="Main Image">
+    </div>
+
+    <!-- Floating WhatsApp Icon -->
+    <a href="https://wa.me/qr/4GMFLUPJK43FG1" class="whatsapp-icon">
+        <i class="fab fa-whatsapp"></i>
+        <span>Chat</span>
+    </a>
+
+   <footer style="text-align: center; background: #ffffff; 
+               border-radius: 20px; 
+               box-shadow: 8px 8px 15px rgba(184, 184, 184, 0.5), 
+                           -8px -8px 15px rgba(255, 255, 255, 0.9); 
+               padding: 20px; 
+               width: 100%; /* Full width */
+               position: relative; /* Position relative for stacking context */
+               bottom: 0; /* Stick to the bottom */
+               left: 0; /* Align to the left */
+               margin: 0; /* Remove margin */
+               display: flex; /* Use flexbox for layout */
+               flex-direction: column; /* Stack items vertically */
+               align-items: center;"> <!-- Center items -->
+    <h3 style="font-family: 'Montserrat', Arial, sans-serif; font-weight: bold; color: #001f3d;">Get In Touch</h3>
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:700&display=swap" rel="stylesheet">
+       <div class="social-links" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 15px;">
+        <a href="https://facebook.com/@willardmagiga" style="background-color: #1877F2; color: white; padding: 10px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; text-decoration: none;">
+            <i class="fab fa-facebook-f" style="font-size: 20px;"></i>
+        </a>
+        <a href="https://www.instagram.com/trinkoh_arts?igsh=NTc4MTIwNjQ2YQ==" style="background-color: #833AB4; color: white; padding: 10px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; text-decoration: none;">
+            <i class="fab fa-instagram" style="font-size: 20px;"></i>
+        </a>
+        <a href="https://youtube.com/@willardmagiga?si=iqZKvunZYQSUUp4Z" style="background-color: #FD1D1D; color: white; padding: 10px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; text-decoration: none;">
+            <i class="fab fa-youtube" style="font-size: 20px;"></i>
+        </a>
+        <a href="mailto:trinkoharts@gmail.com" style="background-color: #0072C6; color: white; padding: 10px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; text-decoration: none;">
+            <i class="fas fa-envelope" style="font-size: 20px;"></i>
+        </a>
+    </div>
+    <p style="margin-top: 20px;">&copy; 2025 | All rights reserved.</p>
+    <p><a href="mailto:kunashendokanga04@gmail.com" style="text-decoration: none; color: #ffffff; background-color: #001f3d; padding: 10px; border-radius: 5px;">Contact Developer</a></p>
+</footer>
+
+<script>
+    function toggleDropdown(button) {
+        const dropdown = button.nextElementSibling;
+        dropdown.style.display = dropdown.style.display === "none" || dropdown.style.display === "" ? "block" : "none";
+    }
+</script>
+
+</body>
+</html>

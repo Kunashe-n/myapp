@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Website</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            background-color: #e0e0e0; /* Light background for neumorphism */
+            color: #333;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header {
+            background: #001f3d;
+            border-radius: 20px;
+            box-shadow: 8px 8px 15px rgba(184, 184, 184, 0.5), -8px -8px 15px rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            width: 90%;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        h1 {
+            color: #e0e0e0; /* Dark text for header */
+        }
+
+        nav a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: #e0e0e0;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #0056b3; /* Change color on hover */
+        }
+
+        section {
+            width: 90%;
+            margin: 20px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .additional-image {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+            background: #ffffff;
+            border-radius: 20px;
+            box-shadow: 8px 8px 15px rgba(184, 184, 184, 0.5), -8px -8px 15px rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            width: 100%;
+        }
+
+        img {
+            border-radius: 10px;
+            box-shadow: 5px 5px 10px rgba(184, 184, 184, 0.5), -5px -5px 10px rgba(255, 255, 255, 0.9);
+            width: 100%;
+            max-width: 300px;
+        }
+
+        button {
+            background-color: #001f3d;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 15px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .dropdown-content {
+            display: none;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .post {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+            background: #ffffff;
+            border-radius: 20px;
+            box-shadow: 8px 8px 15px rgba(184, 184, 184, 0.5), -8px -8px 15px rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            width: 100%;
+        }
+
+        .video-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px 0;
+        }
+
+        video {
+            border-radius: 10px;
+            box-shadow: 5px 5px 10px rgba(184, 184, 184, 0.5), -5px -5px 10px rgba(255, 255, 255, 0.9);
+            width: 100%;
+            max-width: 300px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+
+        .social-links a {
+            margin: 10px;
+            text-decoration: none;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .social-links a:hover {
+            opacity: 0.8;
+        }
+
+
+        /* Floating WhatsApp Icon */
+        .whatsapp-icon {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: #ffffff;
+            background-color: #25D366;
+            padding: 10px;
+            border-radius: 50px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .whatsapp-icon i {
+            font-size: 24px;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Welcome to Willard Magiga Exhibit</h1>
+        <nav>
+          <a href="{{ url_for('upload_image') }}" title="Shop">
+            <i class="fas fa-shopping-cart"></i>
+        </a>
+        <a href="{{ url_for('about') }}" title="About">
+            <i class="fas fa-info-circle"></i>
+        </a>
+        <a href="{{ url_for('contact') }}" title="Contact">
+            <i class="fas fa-envelope"></i>
+        </a>
+        </nav>
+    </header>
+    
+    <section>
+        <div class="additional-image">
+            <h3>{{'Title: A Mother`s Prayer'}}</h3>
+            <img src="{{ url_for('static', filename='uploads/images/IMG-20250311-WA0028.jpg') }}" alt="Additional Image">
+            <button onclick="toggleDropdown(this)">Details</button>
+            <div class="dropdown-content">
+                <p>Mixed Art Media(Oils, Weave and Cloth) on canvas</p>
+                <p>Year : 2025</p>
+                <p>Artist: Willard Magiga</p> 
+                <p>Size: 80x70cm</p>
+                <p>Price: USD$800</p>
+                <p>Status: Available for purchase</p>
+                <p>In 'A Mother's Prayer', a loving mother pours her soul into creating a stunning wedding gown for her daughter...</p>
+            </div>
+        </div>
+        
+        <div class="additional-image">
+            <h3>{{'Title: Stripes of Joy'}}</h3>
+            <img src="{{ url_for('static', filename='uploads/images/IMG-20250223-WA0018(1).jpg') }}" alt="Additional Image">
+            <button onclick="toggleDropdown(this)">Details</button>
+            <div class="dropdown-content">
+                <p>Mixed Art Media(Oils and Weave)</p>
+                <p>Year : 2025</p>
+                <p>Artist: Willard Magiga</p> 
+                <p>Size: 80x70cm</p>
+                <p>Price: USD$500</p>
+                <p>Status: Available for purchase</p>
+                <p>'Stripes of Joy' captures the essence of unbridled happiness...</p>
+            </div>
+        </div>
+
+        {% for post in posts %}
+        <div class="post">
+            {% if post.image_file %}
+                <h3>{{ 'Title: Kunyeyana' }}</h3>
+                <img src="{{ url_for('static', filename='uploads/images/IMG-20250223-WA0021.jpg') }}" alt="Image">
+                <button onclick="toggleDropdown(this)">Details</button>
+                <div class="dropdown-content">
+                    <p>Medium: Mixed Art Media(Oils and Braids)</p>
+                    <p>Year: 2025</p>
+                    <p>Artist: Willard Magiga</p>
+                    <p>Size: 84cm x 60cm</p> 
+                    <p>Price: USD$500</p>
+                    <p>Status: Available for purchase</p>
+                    <p>"Kunyeyana," a captivating visual narrative...</p>
+                </div>
+            {% elif post.video_file %}
+                <div class="video-container">
+                    <video controls>
+                        <source src="{{ url_for('static', filename='uploads/videos/VID-20250223-WA0022.mp4') }}" type="video/mp4">
+                    </video>
+                </div>
+            {% endif %}
+        </div>
+        {% endfor %}
+
+ <section>
+    <div style="background: #ffffff; /* Light background for neumorphism */
+                 border-radius: 20px;
+                 box-shadow: 8px 8px 15px rgba(184, 184, 184, 0.5), 
+                             -8px -8px 15px rgba(255, 255, 255, 0.9);
+                 padding: 20px;
+                 width: 90%; /* Adjust width for responsiveness */
+                 margin: 20px auto; /* Center the container */
+                 display: flex; 
+                 justify-content: space-between; 
+                 align-items: flex-start;">
+        
+        <div style="text-align: center; width: 48%;">
+            <h3>{{'Title: Braids Across Borders'}}</h3>
+            <img src="{{ url_for('static', filename='uploads/images/IMG-20250223-WA0019.jpg') }}" alt="Main Image" style="width: 100%; border-radius: 10px;">
+             <button onclick="toggleDropdown(this)" style="margin-top: 10px; display: block; margin-left: auto; margin-right: auto;">Details</button>
+            <div class="dropdown-content" style="margin-top: 10px; display: none;">
+                <p>Medium: Mixed Art Media (Oils, Braids and bond paper) on canvas</p>
+                <p>Year: 2025</p>
+                <p>Artist: Willard Magiga</p>
+                <p>Size: 50x35cm</p>
+                <p>Price: USD$200</p>
+                <p>Status: Available for purchase</p>
+            </div>
+            </div>
+
+        <div style="text-align: center; width: 48%;">
+            <h3>{{'Title: The Himba Spirit'}}</h3>
+            <img src="{{ url_for('static', filename='uploads/images/IMG-20250329-WA0021.jpg') }}" alt="Main Image" style="width: 100%; border-radius: 10px;">
+            <button onclick="toggleDropdown(this)" style="margin-top: 10px; display: block; margin-left: auto; margin-right: auto;">Details</button>
+            <div class="dropdown-content" style="margin-top: 10px; display: none;">
+                <p>Medium: Mixed Art Media (Oils, Acrylics and artificial hair) on canvas</p>
+                <p>Year: 2024</p>
+                <p>Artist: Willard Magiga</p>
+                <p>Size: 34.5x25cm</p>
+                <p>Price: USD$50</p>
+                <p>Status: Available for purchase</p>
+            </div>
+        </div>
+</section>
+
+<script>
+    function toggleDropdown(button) {
+        const dropdown = button.previousElementSibling; // Get the dropdown content above the button
+        dropdown.style.display = dropdown.style.display === "none" || dropdown.style.display === "" ? "block" : "none";
+    }
+</script>
+
+ <section>
+    <div style="background: #ffffff; /* Light background for neumorphism */
+                 border-radius: 20px;
+                 box-shadow: 8px 8px 15px rgba(184, 184, 184, 0.5), 
+                             -8px -8px 15px rgba(255, 255, 255, 0.9);
+                 padding: 20px;
+                 width: 90%; /* Adjust width for responsiveness */
+                 margin: 20px auto; /* Center the container */
+                 display: flex; 
+                 justify-content: space-between; 
+                 align-items: flex-start;">
+
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; width: 100%;">
+                <div style="text-align: center; width: 48%;">
+                    <h3>{{'Title: Baba nemwana'}}</h3>
+                    <img src="/static/uploads/images/IMG-20250401-WA0007.jpg" alt="Main Image">
+                   <button onclick="toggleDropdown(this)" style="margin-top: 10px; display: block; margin-left: auto; margin-right: auto;">Details</button>
+            <div class="dropdown-content">
+                        <p>Medium: Oils on canvas</p>
+                        <p>Year: 2025</p>
+                        <p>Artist: Willard Magiga</p>
+                        <p>Size: 34.5x25cm</p>
+                        <p>Price: USD$40</p>
+                        <p>Status: Available for purchase</p>
+                    </div>
+                </div>
+                <div style="text-align: center; width: 48%;">
+                    <h3>{{'Title: Tired Trader'}}</h3>
+                    <img src="/static/uploads/images/IMG-20250401-WA0009.jpg" alt="Main Image">
+                   <button onclick="toggleDropdown(this)" style="margin-top: 10px; display: block; margin-left: auto; margin-right: auto;">Details</button>
+                    <div class="dropdown-content">
+                        <p>Medium: Oils on canvas</p>
+                        <p>Year: 2025</p>
+                        <p>Artist: Willard Magiga</p>
+                        <p>Size: 42x29.4cm</p>
+                        <p>Price: USD$50</p>
+                        <p>Status: Available for purchase</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    <footer style="text-align: center; background: #ffffff; 
+               border-radius: 20px; 
+               box-shadow: 8px 8px 15px rgba(184, 184, 184, 0.5), 
+                           -8px -8px 15px rgba(255, 255, 255, 0.9); 
+               padding: 20px; 
+               width: 100%; /* Full width */
+               position: relative; /* Position relative for stacking context */
+               bottom: 0; /* Stick to the bottom */
+               left: 0; /* Align to the left */
+               margin: 0; /* Remove margin */
+               display: flex; /* Use flexbox for layout */
+               flex-direction: column; /* Stack items vertically */
+               align-items: center;"> <!-- Center items -->
+    <h3 style="margin-bottom: 20px;">GET IN TOUCH</h3>
+    <div class="social-links" style="display: flex; flex-wrap: nowrap; justify-content: center; gap: 15px; width: 100%; overflow-x: auto;">
+        <a href="https://facebook.com/@willardmagiga" style="background-color: #1877F2; color: white; padding: 10px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; text-decoration: none;">
+            <i class="fab fa-facebook-f" style="font-size: 20px;"></i>
+        </a>
+        <a href="https://www.instagram.com/trinkoh_arts?igsh=NTc4MTIwNjQ2YQ==" style="background-color: #833AB4; color: white; padding: 10px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; text-decoration: none;">
+            <i class="fab fa-instagram" style="font-size: 20px;"></i>
+        </a>
+        <a href="https://youtube.com/@willardmagiga?si=iqZKvunZYQSUUp4Z" style="background-color: #FD1D1D; color: white; padding: 10px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; text-decoration: none;">
+            <i class="fab fa-youtube" style="font-size: 20px;"></i>
+        </a>
+        <a href="mailto:trinkoharts@gmail.com" style="background-color: #0072C6; color: white; padding: 10px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; text-decoration: none;">
+            <i class="fas fa-envelope" style="font-size: 20px;"></i>
+        </a>
+    </div>
+    <p style="margin-top: 20px;">&copy; 2025 | All rights reserved.</p>
+    <p><a href="mailto:kunashendokanga04@gmail.com" style="text-decoration: none; color: #ffffff; background-color: #001f3d; padding: 10px; border-radius: 5px;">Contact Developer</a></p>
+</footer>
+
+<script>
+    function toggleDropdown(button) {
+        const dropdown = button.nextElementSibling;
+        dropdown.style.display = dropdown.style.display === "none" || dropdown.style.display === "" ? "block" : "none";
+    }
+</script>
+
+  <!-- Floating WhatsApp Icon -->
+    <a href="https://wa.me/message/BJHVRLRXZ6XPO1" class="whatsapp-icon">
+        <i class="fab fa-whatsapp"></i>
+        <span>Chat</span>
+    </a>
+</body>
+</html>

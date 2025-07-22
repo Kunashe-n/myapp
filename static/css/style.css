@@ -1,0 +1,295 @@
+body {
+    font-family: Arial, sans-serif;
+    color: #333; /* Changed to a darker color for better contrast */
+    background-color: #e0e0e0; /* Light background for neumorphism */
+    margin: 0;
+    padding: 0;
+}
+/* Default (Dark Mode) */
+body {
+    margin: 0;
+    background-color: #333; /* Dark background */
+    color: #e0e0e0; /* Light text */
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+header {
+    background: #444; /* Dark header */
+    border-radius: 20px;
+    box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.5), -8px -8px 15px rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    width: 90%;
+    margin: 20px 0;
+    text-align: center;
+}
+
+nav a {
+    margin: 0 15px;
+    text-decoration: none;
+    color: #e0e0e0; /* Light text */
+    font-weight: bold;
+}
+
+/* Light Mode */
+body.light-mode {
+    background-color: #e0e0e0; /* Light background */
+    color: #333; /* Dark text */
+}
+
+header.light-mode {
+    background: #ffffff; /* Light header */
+}
+
+nav a.light-mode {
+    color: #333; /* Dark text for links */
+}
+
+/* Add other styles for light mode as needed */
+
+
+header {
+    background-color: #001f3d;
+    padding: 20px;
+    text-align: center;
+    border-radius: 20px;
+    box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.2), -8px -8px 15px rgba(255, 255, 255, 0.9);
+    margin: 20px;
+}
+
+h1 {
+    font-size: 2.5em; /* Increased font size for better visibility */
+    margin: 0;
+    color: #ffffff; /* Ensured header text is white */
+}
+
+nav a {
+    color: white;
+    margin: 0 15px;
+    text-decoration: none;
+    font-weight: bold; /* Added bold for better emphasis */
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+section {
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center align all section content */
+}
+
+.additional-image, .post {
+    background: #ffffff; /* White background for images and posts */
+    border-radius: 20px;
+    box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.2), -8px -8px 15px rgba(255, 255, 255, 0.9);
+    margin-bottom: 20px;
+    padding: 20px;
+    width: 100%; /* Full width for better responsiveness */
+    max-width: 600px; /* Limit max width for better alignment */
+}
+
+.post {
+    border-bottom: 1px solid #001f3d;
+}
+
+.post img {
+    max-width: 100%;
+    border-radius: 10px; /* Rounded corners for images */
+}
+
+button {
+    background-color: #001f3d;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+}
+
+.dropdown-content {
+    display: none;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.video-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+}
+
+video {
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2), -5px -5px 10px rgba(255, 255, 255, 0.9);
+    width: 100%;
+    max-width: 300px; /* Limit video width for better alignment */
+}
+
+body {
+    font-family: Arial, sans-serif;
+    color: white;
+    background-color: #001f3d; /* Dark background */
+}
+
+header {
+    background-color: #001f3d;
+    padding: 10px;
+    text-align: center;
+}
+
+h1 {
+    font-size: 2.5em; /* Increased font size */
+}
+
+nav a {
+    color: white;
+    margin: 0 15px;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+section {
+    margin-top: 20px;
+    width: 90%; /* Set a max width for better alignment */
+}
+
+.additional-image {
+    background: #ffffff; /* Light background for images */
+    border-radius: 20px;
+    box-shadow: 8px 8px 15px rgba(184, 184, 184, 0.5), -8px -8px 15px rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.post {
+    border-bottom: 1px solid #001f3d;
+    margin-bottom: 20px;
+    padding: 5px;
+}
+
+.post img {
+    max-width: 100%;
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px rgba(184, 184, 184, 0.5), -5px -5px 10px rgba(255, 255, 255, 0.9);
+}
+
+footer {
+    margin-top: 100px;
+    text-align: center;
+    padding: 10px 0;
+    background-color: #001f3d; /* Dark footer */
+}
+body {
+    font-family: Arial, sans-serif;
+    color: white;
+    background-color: #001f3d; /* Dark background */
+}
+
+header {
+    background-color: #001f3d;
+    padding: 5px;
+    text-align: center;
+}
+
+h1 {
+    font-size: 2em;
+}
+
+nav a {
+    color: white;
+    margin: 0 15px;
+    text-decoration: none;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+section {
+    margin-top: 20px;
+}
+
+.additional-image {
+    background: #ffffff; /* Light background for images */
+    border-radius: 20px;
+    box-shadow: 8px 8px 15px rgba(184, 184, 184, 0.5), -8px -8px 15px rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.additional-image img {
+    max-width: 100%;
+    border-radius: 10px;
+}
+
+footer {
+    margin-top: 100px;
+    text-align: center;
+    padding: 10px 0;
+    background-color: #001f3d; /* Dark footer */
+}
+body {
+    font-family: Arial, sans-serif;
+    color: white;
+    background-color: #001f3d; /* Dark background */
+}
+
+header {
+    background-color: #001f3d;
+    padding: 5px;
+    text-align: center;
+}
+
+h1 {
+    font-size: 2em;
+}
+
+nav a {
+    color: white;
+    margin: 0 15px;
+    text-decoration: none;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+section {
+    margin-top: 20px;
+}
+
+.additional-image {
+    background: #ffffff; /* Light background for images */
+    border-radius: 20px;
+    box-shadow: 8px 8px 15px rgba(184, 184, 184, 0.5), -8px -8px 15px rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.additional-image img {
+    max-width: 100%;
+    border-radius: 10px;
+}
+
+footer {
+    margin-top: 100px;
+    text-align: center;
+    padding: 10px 0;
+    background-color: #001f3d; /* Dark footer */
+}

@@ -765,48 +765,34 @@
         <div id="paypal-button-container"></div>
     <script>
         const totalAmount = "{{ total_price }}"; // Use the actual total amount here
-
         paypal.Buttons({
             createOrder: function(data, actions) {
-                return actions.order.create({
-                    purchase_units: [{
-                        amount: {
-                            value: totalAmount  // Replace with the actual amount
-                        }
-                    }]
-                }).then(function(orderId) {
-                    return orderId; // Return the order ID to the onApprove function
+                return fetch('/create_paypal_payment', {
+                    method: 'post',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        total: '{{ total_price }}'  // Ensure this is a valid number
+                    })
+                }).then(function(res) {
+                    return res.json();
+                }).then(function(data) {
+                    return data.id;  // Return the order ID
                 });
             },
             onApprove: function(data, actions) {
                 return actions.order.capture().then(function(details) {
-                    console.log('Transaction completed by ' + details.payer.name.given_name);
-                    
-                    // Send the order ID to your server to capture the payment
-                    fetch('/capture_payment', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            orderID: data.orderID // Send the order ID to your server
-                        })
-                    }).then(function(response) {
-                        return response.json();
-                    }).then(function(data) {
-                        console.log(data);
-                        // Handle success or error response from your server
-                    });
+                    alert('Transaction completed by ' + details.payer.name.given_name);
+                    // Redirect to your success page
+                    window.location.href = '/payment_success';  // Change to your success URL
                 });
             },
             onError: function(err) {
                 console.error('PayPal Button Error:', err);
             }
         }).render('#paypal-button-container'); // Display the PayPal button
-    </script>
-        {% else %}
-            <p>No items in the cart.</p>
-        {% endif %}
+
     </div>
        <script>
 const cart = [];  // Initialize the cart

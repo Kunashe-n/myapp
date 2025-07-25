@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wildlife</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+   <style>
+           body {
+            margin: 0;
+            background-color: #e0e0e0; /* Light background for neumorphism */
+            color: #333;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+          header {
+            background: #001f3d;
+            border-radius: 10px;
+            box-shadow: 8px 8px 15px rgba(184, 184, 184, 0.5), -8px -8px 15px rgba(255, 255, 255, 0.9);
+            padding: 10px;
+            width: 100%;
+            margin: 0px 0;
+            text-align: center;
+        }
+
+        h1 {
+            color: #e0e0e0; /* Dark text for header */
+        }
+
+        nav a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: #e0e0e0;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #0056b3; /* Change color on hover */
+        }
+
+        section {
+            width: 90%;
+            margin: 20px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .additional-image {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+            background: #ffffff;
+            border-radius: 20px;
+            box-shadow: 8px 8px 15px rgba(184, 184, 184, 0.5), -8px -8px 15px rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            width: 100%;
+        }
+
+        .cart-icon {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 18px;
+            color: #001f3d;
+            cursor: pointer;
+        }
+        .cart-icon {
+    /* existing styles */
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+}
+
+.cart-icon:hover {
+    background: #001f3d;
+    color: white;
+}
+
+/* Notification styles */
+.notification {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #28a745;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    z-index: 2000;
+    display: none;
+    animation: fadeInOut 2.5s ease-in-out;
+}
+
+@keyframes fadeInOut {
+    0%, 100% { opacity: 0; transform: translateY(20px); }
+    20% { opacity: 1; transform: translateY(0); }
+    80% { opacity: 1; transform: translateY(0); }
+}
+
+.cart-icon {
+    /* existing styles */
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+}
+
+.cart-icon:hover {
+    background: #001f3d;
+    color: white;
+}
+        img {
+            border-radius: 10px;
+            box-shadow: 5px 5px 10px rgba(184, 184, 184, 0.5), -5px -5px 10px rgba(255, 255, 255, 0.9);
+            width: 100%;
+            max-width: 300px;
+        }
+
+        button {
+            background-color: #001f3d;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 15px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .dropdown-content {
+            display: none;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .post {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+            background: #ffffff;
+            border-radius: 20px;
+            box-shadow: 8px 8px 15px rgba(184, 184, 184, 0.5), -8px -8px 15px rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            width: 100%;
+        }
+
+        .video-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px 0;
+        }
+
+        video {
+            border-radius: 10px;
+            box-shadow: 5px 5px 10px rgba(184, 184, 184, 0.5), -5px -5px 10px rgba(255, 255, 255, 0.9);
+            width: 100%;
+            max-width: 300px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+
+        .social-links a {
+            margin: 10px;
+            text-decoration: none;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .social-links a:hover {
+            opacity: 0.8;
+        }
+
+
+        /* Floating WhatsApp Icon */
+        .whatsapp-icon {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: #ffffff;
+            background-color: #25D366;
+            padding: 10px;
+            border-radius: 50px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .whatsapp-icon i {
+            font-size: 24px;
+            margin-right: 10px;
+        }
+        
+        /* Hamburger menu styles */
+        .hamburger-menu {
+            margin-top: 20px;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .hamburger-menu div {
+            width: 30px;
+            height: 3px;
+            background-color: #001f3d;
+            margin: 3px 0;
+            transition: all 0.3s ease;
+        }
+
+        /* Footer dropdown menu */
+        .footer-dropdown-content {
+            display: none;
+            margin-top: 10px;
+            text-align: center;
+            background: #ffffff;
+            border-radius: 10px;
+            padding: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 200px;
+        }
+
+        .footer-dropdown-content a {
+            display: block;
+            margin: 10px 0;
+            text-decoration: none;
+            color: #001f3d;
+            padding: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .footer-dropdown-content a:hover {
+            background-color: #f0f0f0;
+            border-radius: 5px;
+        }
+
+        /* Active state for hamburger menu */
+        .hamburger-menu.active div:nth-child(1) {
+            transform: translateY(8px) rotate(45deg);
+        }
+
+        .hamburger-menu.active div:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger-menu.active div:nth-child(3) {
+            transform: translateY(-8px) rotate(-45deg);
+        }
+
+        /* Cart Modal Styles */
+        .cart-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .cart-content {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            width: 80%;
+            max-width: 500px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .cart-content h3 {
+            margin: 0 0 10px;
+        }
+
+         .cart-item {
+            display: flex;
+            justify-content: space-between;
+            margin: 5px 0;
+        }
+        .cart-item button {
+            background-color: #ff4d4d;
+            border: none;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .cart-item button:hover {
+            background-color: #ff1a1a;
+        }
+        .additional-image {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: 8px 8px 15px rgba(184, 184, 184, 0.5), -8px -8px 15px rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    width: 100%;
+    position: relative; /* Add this line */
+}
+</style>
+</head>
+<body>
+    <header>
+        <h2 style="font-family: 'Montserrat', Arial, sans-serif; font-weight: bold; color: #fff;">Wildlife</h2>
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:700&display=swap" rel="stylesheet">
+               <nav>
+             <a href="{{ url_for('index') }}" title="Home">
+        <i class="fas fa-home"></i>
+    </a>
+    <a href="{{ url_for('potrait') }}" title="Potraits">
+        <i class="fas fa-user"></i>
+    </a>
+    <a href="{{ url_for('contemporary') }}" title="Contemporary">
+        <i class="fas fa-paint-brush"></i>
+    </a>
+     <a href="{{ url_for('about') }}" title="About">
+            <i class="fas fa-info-circle"></i>
+        </a>
+    <a href="{{ url_for('contact') }}" title="Contact">
+        <i class="fas fa-envelope"></i>
+    </a>
+     <a href="#" id="cart-icon" title="Cart" onclick="toggleCartModal()">
+                <i class="fas fa-shopping-cart"></i>
+            </a>
+        </nav>
+    </header>
+    
+    <section>
+        <div class="additional-image">
+            <h3>{{'Title: Focus'}}</h3>
+            <img src="{{ url_for('static', filename='uploads/images/2025-07-21 at 18.38.02_82692748.jpg') }}" alt="Additional Image">
+             <i class="fas fa-shopping-cart cart-icon" onclick="addToCart('Focus', '38x36cm', 100)" style="top: 10px; right: 10px;"></i>
+            <button onclick="toggleDropdown(this)">Details</button>
+            <div class="dropdown-content">
+                <p>Medium : Oils on Canvas</p>
+                <p>Year : 2025</p>
+                <p>Size: 38x36cm</p>
+                <p>Price: USD$100</p>
+                <p>Status: Available for purchase</p>
+                <p>A masterpiece that captures the beauty of concentration and intent! This stunning piece of art will transport you to a world of calm and clarity, where every detail converges to reveal the power of a single, unwavering gaze.</p>
+            </div>
+        </div>
+
+         <div class="additional-image">
+           <h3>{{'Title: Roar of Beauty '}}</h3>
+            <img src="{{ url_for('static', filename='uploads/images/2025-07-21 at 18.38.08_19a997e5.jpg') }}" alt="Additional Image">
+             <i class="fas fa-shopping-cart cart-icon" onclick="addToCart('Roar of Beauty', 'A3', 100)" style="top: 10px; right: 10px;"></i>
+            <button onclick="toggleDropdown(this)">Details</button>
+            <div class="dropdown-content">
+                <p>Medium - Oils on Canvas</p>
+                <p>Year : 2025</p>
+                <p>Size: A3</p>
+                <p>Price: USD$100</p>
+                <p>Status: Available for purchase</p>
+                 <p>Unleash the wild side of art with this stunning tiger face painting, capturing the essence of power and beauty in every brushstroke.</p>
+            </div>
+        </div>
+
+         <div class="additional-image">
+            <h3>{{ 'Title: Leopard' }}</h3>
+                <img src="{{ url_for('static', filename='uploads/images/2025-07-21 at 18.38.06_df6bf1e3.jpg') }}" alt="Image">
+                 <i class="fas fa-shopping-cart cart-icon" onclick="addToCart('Leopard', 'A3', 100)" style="top: 10px; right: 10px;"></i>
+                <button onclick="toggleDropdown(this)">Details</button>
+                <div class="dropdown-content">
+                    <p>Medium: Mixed Art Media(Oils and Braids)</p>
+                    <p>Year: 2025</p>
+                    <p>Size:A3</p> 
+                    <p>Price: USD$100</p>
+                    <p>Status: Available for purchase</p>
+                    <p>"Midnight whispers and moonlit spots, the leopard's elegance is a language all its own, speaking directly to the soul.</p>
+                 </div>
+        </div>
+
+        
+        <div class="additional-image">
+            <h3>{{'Title:  Majestic and rare'}}</h3>
+            <img src="{{ url_for('static', filename='uploads/images/2025-07-21 at 18.38.05_d48b044a.jpg') }}" alt="Additional Image">
+             <i class="fas fa-shopping-cart cart-icon" onclick="addToCart('Majestic and rare', 'A3', 100)" style="top: 10px; right: 10px;"></i>
+            <button onclick="toggleDropdown(this)">Details</button>
+            <div class="dropdown-content">
+                <p>Media: Oils on canvas</p>
+                <p>Year : 2025</p>
+                <p>Size: A3</p>
+                <p>Price: USD$100</p>
+                <p>Status: Available for purchase</p>
+                <p>Majestic and rare, the white tiger's piercing gaze leaves me in awe! This stunning creature is one of the many faces in my ongoing tiger series, where I explore the beauty and power of these majestic animals.</p>
+            </div>
+        </div>
+
+        <div class="additional-image">
+            <h3>{{'Title: The King'}}</h3>
+            <img src="{{ url_for('static', filename='uploads/images/2025-07-21 at 18.38.09_0fda4c80.jpg') }}" alt="Additional Image">
+             <i class="fas fa-shopping-cart cart-icon" onclick="addToCart('The King', 'A3', 100)" style="top: 10px; right: 10px;"></i>
+            <button onclick="toggleDropdown(this)">Details</button>
+            <div class="dropdown-content">
+                <p>Media: Oils on canvas</p>
+                <p>Year : 2025</p> 
+                <p>Size: A3</p>
+                <p>Price: USD$100</p>
+                <p>Status: Available for purchase</p>
+                <p>The king has arrived! Majestic, powerful, and full of life, the male lion's regal mane and piercing gaze command respect and inspire awe. A symbol of strength, courage, and loyalty, this magnificent creature rules the savannah with grace and authority. Let's celebrate the majesty of the lion, a true marvel of nature!</p>
+            </div>
+        </div>
+
+         <div class="additional-image">
+            <h3>{{'Title:  Regal Roar'}}</h3>
+            <img src="{{ url_for('static', filename='uploads/images/2025-07-21 at 18.38.10_7a52f120.jpg') }}" alt="Additional Image">
+             <i class="fas fa-shopping-cart cart-icon" onclick="addToCart('Regal Roar', '70x60cm', 100)" style="top: 10px; right: 10px;"></i>
+            <button onclick="toggleDropdown(this)">Details</button>
+            <div class="dropdown-content">
+                <p>Media: Oils on canvas</p>
+                <p>Year : 2025</p>
+                <p>Size: 70x60cm</p>
+                <p>Price: USD$130</p>
+                <p>Status: Available for purchase</p>
+                <p>A majestic male lion lets out a powerful roar, echoing through the savannah as the king of the wild. With a regal mane and piercing gaze, this lion embodies strength, courage, and dominion over his kingdom. The golden hues of his fur glisten in the sunlight, symbolizing the warmth and vitality of the African wilderness.</p>
+            </div>
+        </div>
+
+         <div class="additional-image">
+            <h3>{{'Title: The African Big 5'}}</h3>
+            <img src="{{ url_for('static', filename='uploads/images/2025-07-21 at 18.38.08_d401acaa.jpg') }}" alt="Additional Image">
+             <i class="fas fa-shopping-cart cart-icon" onclick="addToCart('The African Big 5', '84x60cm', 200)" style="top: 10px; right: 10px;"></i>
+            <button onclick="toggleDropdown(this)">Details</button>
+            <div class="dropdown-content">
+                <p>Media: Oils on canvas</p>
+                <p>Year : 2025</p>
+                <p>Size: 84x60cm</p>
+                <p>Price: USD$200</p>
+                <p>Status: Available for purchase</p>
+                </div>
+        </div>
+
+         <div class="additional-image">
+            <h3>{{'Title: African Big 5'}}</h3>
+            <img src="{{ url_for('static', filename='uploads/images/2025-07-21 at 18.37.54_01078428.jpg') }}" alt="Additional Image">
+            <i class="fas fa-shopping-cart cart-icon" onclick="addToCart('The African Big 5', '70x60cm', 200)" style="top: 10px; right: 10px;"></i>
+            <button onclick="toggleDropdown(this)">Details</button>
+            <div class="dropdown-content">
+                <p>Media: Oils on canvas</p>
+                <p>Year : 2025</p>
+                <p>Size: 70x60cm</p>
+                <p>Price: USD$200</p>
+                <p>Status: Available for purchase</p>
+               </div>
+        </div>
+
+         <div class="additional-image">
+            <h3>{{'Title: African Big 5'}}</h3>
+            <img src="{{ url_for('static', filename='uploads/images/2025-07-21 at 18.37.46_43cf8620.jpg') }}" alt="Additional Image">
+            <i class="fas fa-shopping-cart cart-icon" onclick="addToCart('The African Big 5', '84x60cm', 200)" style="top: 10px; right: 10px;"></i>
+            <button onclick="toggleDropdown(this)">Details</button>
+            <div class="dropdown-content">
+                <p>Media: Oils on canvas</p>
+                <p>Year : 2025</p>
+                <p>Size: 84x60cm</p>
+                <p>Price: USD$200</p>
+                <p>Status: Available for purchase</p>
+                </div>
+        </div>
+         <div class="additional-image">
+            <h3>{{'Title: Baobabs'}}</h3>
+            <img src="{{ url_for('static', filename='uploads/images/2025-07-21 at 18.38.00_380c0cf7.jpg') }}" alt="Additional Image">
+            <i class="fas fa-shopping-cart cart-icon" onclick="addToCart('Baobabs', 'A4', 50)" style="top: 10px; right: 10px;"></i>
+            <button onclick="toggleDropdown(this)">Details</button>
+            <div class="dropdown-content">
+                <p>Media: Oils on canvas</p>
+                <p>Year : 2025</p> 
+                <p>Size: A4</p>
+                <p>Price: USD$50</p>
+                <p>Status: Available for purchase</p>
+                <p>A treasure trove of stories and secrets. With their twisted trunks and branches, they hold the history and wisdom of generations. These trees have seen it all, from the rise and fall of civilizations to the changing of the seasons. Let's uncover the secrets of these incredible trees!</p>
+            </div>
+        </div>
+
+         <div class="additional-image">
+            <h3>{{'Title: Majestic Baobab'}}</h3>
+            <img src="{{ url_for('static', filename='uploads/images/2025-07-21 at 18.38.00_4f9dcafe.jpg') }}" alt="Additional Image">
+            <i class="fas fa-shopping-cart cart-icon" onclick="addToCart('Majestic Baobab', 'A4', 50)" style="top: 10px; right: 10px;"></i>
+            <button onclick="toggleDropdown(this)">Details</button>
+            <div class="dropdown-content">
+                <p>Media: Oils on canvas</p>
+                <p>Year : 2025</p>
+                <p>Size: A4</p>
+                <p>Price: USD$50</p>
+                <p>Status: Available for purchase</p>
+                <p>Majestic baobab, a symbol of life, wisdom, and community. Providing shelter, food, and shade, this ancient tree reminds us of the beauty of nature. </p>
+            </div>
+        </div>
+          <!-- Cart Modal -->
+ <div class="cart-modal" id="cartModal">
+    <div class="cart-content">
+        <h3>Your Cart</h3>
+        <div id="cartItems"></div>
+        <div style="display: flex; justify-content: space-between; margin-top: 20px;">
+            <button onclick="closeCartModal()" style="background-color: #6c757d;">Continue Shopping</button>
+            <button onclick="checkout()" style="background-color: #28a745;">Checkout</button>
+        </div>
+    </div>
+</div>
+   
+<script>
+    const cart = [];  // Initialize the cart
+
+function addToCart(title, size, price) {
+    const item = { title, size, price };  // Create an item object
+    cart.push(item);  // Add the item to the cart
+
+    // Store cart in session (send to Flask)
+    fetch('/update_cart', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(cart)  // Send the cart to the server
+    })
+    .then(response => {
+        if (response.ok) {
+            // Show green notification
+            const notification = document.getElementById('notification');
+            notification.textContent = `${title} added to cart!`;
+            notification.style.display = 'block';
+
+            // Auto-hide after 2.5 seconds
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 2500);
+        } else {
+            console.error('Failed to update cart');
+        }
+    })
+    .catch(error => {
+        console.error('Error updating cart:', error);
+    });
+}
+
+
+
+    function toggleImageDropdown(icon, title, size, price) {
+        const dropdown = icon.nextElementSibling; // Get the dropdown content next to the icon
+        dropdown.style.display = dropdown.style.display === "none" || dropdown.style.display === "" ? "block" : "none";
+    }
+ 
+    function toggleCartModal() {
+        const modal = document.getElementById('cartModal');
+        const cartItemsDiv = document.getElementById('cartItems');
+        cartItemsDiv.innerHTML = ''; // Clear previous items
+        if (cart.length === 0) {
+            cartItemsDiv.innerHTML = '<p>Your cart is empty.</p>';
+        } else {
+            cart.forEach((item, index) => {
+                cartItemsDiv.innerHTML += `
+                    <div class="cart-item">
+                        <span>${item.title} - ${item.size} - USD$${item.price}</span>
+                        <button onclick="removeFromCart(${index})">Remove</button>
+                    </div>
+                `;
+            });
+        }
+        modal.style.display = 'flex'; // Show modal
+    }
+    function closeCartModal() {
+        const modal = document.getElementById('cartModal');
+        modal.style.display = 'none'; // Hide modal
+    }
+    function removeFromCart(index) {
+        cart.splice(index, 1); // Remove item from cart
+        alert('Item removed from cart.');
+        toggleCartModal(); // Refresh cart display
+    }
+
+    function checkout() {
+        if (cart.length === 0) {
+            alert('Your cart is empty!');
+            return;
+        }
+        
+        // Save cart to localStorage
+        localStorage.setItem('cart', JSON.stringify(cart));
+        
+        // Redirect to payment page
+        window.location.href = "/payment";  // Ensure this points to your payment page
+    }
+
+
+     function toggleDropdown(button) {
+        const dropdown = button.previousElementSibling; // Get the dropdown content above the button
+        dropdown.style.display = dropdown.style.display === "none" || dropdown.style.display === "" ? "block" : "none";
+    }
+</script>
+
+            <footer style="text-align: center; background: #ffffff; 
+               border-radius: 20px; 
+               box-shadow: 8px 8px 15px rgba(184, 184, 184, 0.5), 
+                           -8px -8px 15px rgba(255, 255, 255, 0.9); 
+               padding: 20px; 
+               width: 100%; /* Full width */
+               position: relative; /* Position relative for stacking context */
+               bottom: 0; /* Stick to the bottom */
+               left: 0; /* Align to the left */
+               margin: 0; /* Remove margin */
+               display: flex; /* Use flexbox for layout */
+               flex-direction: column; /* Stack items vertically */
+               align-items: center;"> <!-- Center items -->
+    <h3 style="font-family: 'Montserrat', Arial, sans-serif; font-weight: bold; color: #001f3d;">Get In Touch</h3>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:700&display=swap" rel="stylesheet">
+    
+    <div class="social-links" style="display: flex; flex-direction: row; justify-content: center; align-items: center; gap: 15px; flex-wrap: nowrap;">
+        <a href="https://facebook.com/@willardmagiga" style="background-color: #1877F2; color: white; padding: 10px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; text-decoration: none;">
+            <i class="fab fa-facebook-f" style="font-size: 20px;"></i>
+        </a>
+        <a href="https://www.instagram.com/trinkoh_arts?igsh=NTc4MTIwNjQ2YQ==" style="background-color: #833AB4; color: white; padding: 10px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; text-decoration: none;">
+            <i class="fab fa-instagram" style="font-size: 20px;"></i>
+        </a>
+        <a href="https://youtube.com/@willardmagiga?si=iqZKvunZYQSUUp4Z" style="background-color: #FD1D1D; color: white; padding: 10px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; text-decoration: none;">
+            <i class="fab fa-youtube" style="font-size: 20px;"></i>
+        </a>
+        <a href="mailto:trinkoharts@gmail.com" style="background-color: #0072C6; color: white; padding: 10px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; text-decoration: none;">
+            <i class="fas fa-envelope" style="font-size: 20px;"></i>
+        </a>
+    </div>
+    
+    <div class="hamburger-menu" onclick="toggleFooterMenu(this)" style="margin-top: 20px; cursor: pointer;">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+    
+    <div class="footer-dropdown-content" style="display: none; margin-top: 10px; text-align: center;">
+        <a href="{{ url_for('potrait') }}">Potraits</a>
+        <a href="{{ url_for('wildlife') }}">Wildlife </a>
+        <a href="{{ url_for('contemporary') }}">Contemporary</a>
+    </div>
+    
+    <p style="margin-top: 20px;">&copy; 2025 | All rights reserved.</p>
+   </footer>
+
+<script>
+    // Toggle function for artwork details dropdowns
+    function toggleDropdown(button) {
+        const dropdown = button.nextElementSibling; // Get the dropdown content after the button
+        dropdown.style.display = dropdown.style.display === "none" || dropdown.style.display === "" ? "block" : "none";
+    }
+
+    // Toggle function for footer hamburger menu
+    function toggleFooterMenu(menu) {
+        menu.classList.toggle('active');
+        const dropdown = menu.nextElementSibling;
+        dropdown.style.display = dropdown.style.display === "none" || dropdown.style.display === "" ? "block" : "none";
+    }
+
+    // Close dropdowns when clicking outside - modified to only close footer menu
+    document.addEventListener('click', function(event) {
+        // Close footer menu when clicking outside
+        const hamburgerMenu = document.querySelector('.hamburger-menu');
+        const footerDropdown = document.querySelector('.footer-dropdown-content');
+        
+        if (hamburgerMenu && !hamburgerMenu.contains(event.target) && 
+            !footerDropdown.contains(event.target)) {
+            hamburgerMenu.classList.remove('active');
+            footerDropdown.style.display = 'none';
+        }
+    });
+</script>
+
+  <!-- Floating WhatsApp Icon -->
+    <a href="https://wa.me/message/BJHVRLRXZ6XPO1" class="whatsapp-icon">
+        <i class="fab fa-whatsapp"></i>
+        <span>Chat</span>
+    </a>
+        <!-- Notification element -->
+<div id="notification" class="notification"></div>
+</body>
+</html>
